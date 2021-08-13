@@ -308,6 +308,41 @@ img {
   padding-top: 1%;
   font-size: 0px;
 }
+.allInputField{
+  margin: 1rem 0;
+}
+.inputField{
+  width: 80%;
+  margin-bottom: 1rem !important;
+}
+.buttonBox{
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  width: 100%; 
+}
+.check{
+  width: 45%;
+}
+
+.buttons{
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width:400px) {
+  .buttonBox{
+    flex-direction: column;
+  }
+  .check{
+    width: 100%;
+  }
+  .shortimagee{
+    width: 60%;
+  }
+  
+}
 
 
 

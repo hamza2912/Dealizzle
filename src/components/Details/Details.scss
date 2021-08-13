@@ -1,0 +1,28 @@
+.button{
+    font-family: inherit;
+    border: none;
+    width: 150px;
+    height: 50px;
+    font-size: large;
+  }
+  .allButton{
+      display: flex;
+      width: 40%;
+      justify-content: space-between;
+  }
+.button:hover{
+    background-color: #b9a06f;
+    color: white;
+  }
+.aactive{
+    background-color: #b9a06f;
+    color: white;
+  }
+  @media (max-width:400px) {
+    .button{
+      font-size: small;
+    }
+    .allButton{
+      width: 100%;
+    }
+  }

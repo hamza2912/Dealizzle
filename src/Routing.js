@@ -13,9 +13,9 @@ export class Routing extends Component {
                     <Redirect to="/home" />
                 )} />
                 <Route exact path="/home" component={LandingPage} />
-                <Route exact path="/product/:id" component={ProductPage} />
-                <Route exact path="/clearnece"  />
-               
+                <Route exact path="/product/:id"><ProductPage open={this.props.open} /></Route>
+                <Route exact path="/clearnece" />
+
             </Switch>
         )
     }

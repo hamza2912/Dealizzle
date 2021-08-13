@@ -1,4 +1,3 @@
-
 #product_area{
 	position:relative;
 	padding-top: 0;
@@ -112,11 +111,14 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 	font-family: raleway;
 	color: rgb(83, 83, 83);
 	font-weight: 300;
+	
   }
 
 
 .product_text{
 	float: left;
+	width: 100%;
+	padding: 1rem;
 }
 .product_btm_text p {
 	color: #8E8E8E;
@@ -128,6 +130,7 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 	text-transform: capitalize;
 	margin-top: 17px;
 	margin-bottom: 6px;
+	text-align: left;
 	font-size: 17px;
 	
 }
@@ -159,7 +162,16 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 	float: left;
 	color: #222 !important;
 	font-family: montserrat,sans-serif;
+	
+	
   }
+  .discount{
+	font-size: 1.2rem !important;
+	font-weight: 400 !important;
+	float: left;
+	color: rgb(161, 156, 156) !important;
+	font-family: montserrat,sans-serif;
+}
 .no-padding{
 	padding: 0;
 }

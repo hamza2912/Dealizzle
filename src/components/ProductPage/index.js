@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import './styles.scss';
 import { makeStyles } from '@material-ui/core/styles';
 import { connect } from "react-redux";
-import { getProducts, setProduct } from '../../js/actions'
+import { Route, Redirect } from 'react-router-dom';
+import { addProduct, getProducts, setProduct, addProductLocal } from '../../js/actions'
 import { Dropdown, DropdownButton, Form, Col, Row } from 'react-bootstrap';
 import * as yup from 'yup';
+import TextField from '@material-ui/core/TextField';
 import { Formik, Field, ErrorMessage } from 'formik';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -19,14 +22,20 @@ import Button from '@material-ui/core/Button';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
-
+import { counterActions } from '../../reduxToolkit/index';
+import { ThreeSixtyOutlined } from '@material-ui/icons';
+import LandingPage from '../LandingPage/index';
+import { classes } from 'istanbul-lib-coverage';
+import Details from '../Details/Details';
+let filled = false;
+let classess;
+// localStorage.setItem("filled", false);
 const schema = yup.object().shape({
   fullName: yup.string().required(),
   mobile: yup.string().required(),
   emirates: yup.string().required(),
   deliveryAddress: yup.string().required()
 });
-
 class ProductPage extends React.Component {
   constructor(props) {
     super(props);
@@ -35,16 +44,53 @@ class ProductPage extends React.Component {
       fullName: "",
       mobile: "",
       emirates: "",
-      deliveryAddress: ""
+      deliveryAddress: "",
+      v_fullName: false,
+      v_mobile: false,
+      v_emirates: false,
+      v_deliveryAddress: false,
+      btn1: true,
+      btn2: false,
+      btn3: false,
+
     }
+
 
 
   }
 
 
+  nameChangeHandler = event => {
+    this.setState({ fullName: event.target.value, v_fullName: false });
+    console.log(event.target.value.trim())
+  }
+  mobileChangeHandler = event => {
+    this.setState({ mobile: event.target.value, v_mobile: false });
+  }
+  emiratesChangeHandler = event => {
+    this.setState({ emirates: event.target.value, v_emirates: false });
+  }
+  deliveryChangeHandler = event => {
+    this.setState({ deliveryAddress: event.target.value, v_deliveryAddress: false });
+
+  }
 
   componentDidMount = () => {
     const { product } = this.props;
+    console.log("May chalra hon");
+    let valueeee = JSON.parse(localStorage.getItem('name'));
+    let check = localStorage.getItem("filled");
+    if (valueeee !== null && check === true) {
+
+      this.props.addProductLocal(valueeee);
+      this.setState({ fullName: valueeee[0].c_fullName })
+      this.setState({ mobile: valueeee[0].c_phone })
+      this.setState({ emirates: valueeee[0].c_erim })
+      this.setState({ deliveryAddress: valueeee[0].c_delivery })
+
+      console.log(valueeee)
+    }
+
   }
 
   handleSelect = (event, attr) => {
@@ -86,17 +132,75 @@ class ProductPage extends React.Component {
       this.setState({ infoModal: true })
     }
   }
+  addToCardHandler = () => {
+    if (filled == false) {
+      if (this.state.fullName.trim() === "") {
+        this.setState({ v_fullName: true })
+        console.log('dsfdfsg')
+
+      }
+      if (this.state.mobile.trim() === "") {
+        this.setState({ v_mobile: true })
+
+      }
+      if (this.state.emirates.trim() === "") {
+        this.setState({ v_emirates: true })
+      }
+      if (this.state.deliveryAddress.trim() === "") {
+        this.setState({ v_deliveryAddress: true })
+      }
+      // if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.deliveryAddress.trim() === "") {
+      //   return;
+      // }
+    }
+
+    this.props.open()
+    localStorage.setItem("filled", true);
+    filled = localStorage.getItem("filled");
+    console.log(filled)
+
+
+    const { product } = this.props;
+    console.log(product)
+    console.log(this.state.size);
+    console.log(this.state.color);
+    console.log(this.props.addProduct({
+      p_id: product.product_sku,
+      p_name: product.product_name,
+      p_size: this.state.size,
+      p_color: this.state.color,
+      p_quantity: this.state.quantity,
+      p_price: product.retail_selling_price,
+      p_image: 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name
+    }));
+    const details = {
+      c_fullName: this.state.fullName,
+      c_phone: this.state.mobile,
+      c_erim: this.state.emirates,
+      c_delivery: this.state.deliveryAddress,
+    }
+    localStorage.setItem("details", JSON.stringify(details));
+
+
+
+  }
+
   render() {
     const { product } = this.props;
     // console.log(this.state);
     return (
-      <>
+      <div style={{ margin: '0 10%' }}>
+        <div style={{ margin: '0 10%' }}>
+
+          <h1 style={{ textAlign: 'center', fontSize: 40 }}>Women</h1>
+          <hr />
+        </div>
         <div className="card2">
           <div className="container-fliud">
             <div className="wrapper row">
               <div className="preview col-md-5">
                 <div id='carousel-custom' className='carousel slide' data-ride='carousel'>
-                  <div className='carousel-outer'>
+                  <div className='carousel-outer shortimagee'>
 
                     <div className='carousel-inner'>
 
@@ -207,16 +311,28 @@ class ProductPage extends React.Component {
                   style={{ width: '70px', marginBottom: "1%", height: "5%" }}
                 />
 
-                <div className="action">
+                {!localStorage.getItem("filled") && <div className="allInputField">
+                  <h2 style={{ marginTop: '1rem' }}>Kindly fill your details below:</h2>
+                  <TextField className="inputField" error={this.state.v_fullName} id="outlined-basic" label="First Name" variant="outlined" onChange={this.nameChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
+                    InputLabelProps={{ style: { fontSize: 12 } }} />
+                  <TextField className="inputField" error={this.state.v_mobile} id="outlined-basic" label="Mobile" variant="outlined" onChange={this.mobileChangeHandler} type="phone" inputProps={{ style: { fontSize: 12 } }} // font size of input text
+                    InputLabelProps={{ style: { fontSize: 12 } }} />
+                  <TextField className="inputField" error={this.state.v_emirates} id="outlined-basic" label="Emirates" variant="outlined" onChange={this.emiratesChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
+                    InputLabelProps={{ style: { fontSize: 12 } }} />
+                  <TextField className="inputField" error={this.state.v_deliveryAddress} id="outlined-basic" label="Delivery Address" variant="outlined" onChange={this.deliveryChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
+                    InputLabelProps={{ style: { fontSize: 12 } }} />
+                </div>}
+                <div className="action buttonBox">
 
-                  <button className="add-to-cart btn btn-default btn-lg" type="button" onClick={this.disabledCheck}><AddShoppingCartIcon /> Order Now</button>
+                  <button className="add-to-cart btn btn-default btn-lg check" type="button" onClick={this.addToCardHandler}><AddShoppingCartIcon />Add to Card</button>
+                  <button className="add-to-cart btn btn-default btn-lg check" type="button" onClick={() => { window.location.replace(window.location.origin + "/home"); }}><AddShoppingCartIcon /> Add Products</button>
                 </div>
               </div>
               <div className="details col-md-">
                 <ul className="desktop-services" >
                   <li>
                     <div className="service-content">
-                      <div className="service-icon service1" ><RefreshIcon className="icon"  /><span className="hidden">Icon</span></div>
+                      <div className="service-icon service1" ><RefreshIcon className="icon" /><span className="hidden">Icon</span></div>
                       <div className="service-info">
                         <h4>FREE RETURNS REPLACEMENT</h4>
                         <p>Get Free returns Replacement on eligible items</p>
@@ -246,7 +362,9 @@ class ProductPage extends React.Component {
             </div>
           </div>
         </div>
-
+        <div style={{ margin: '0 10%' }}>
+          <Details />
+        </div>
 
 
         <Dialog open={this.state.infoModal} onClose={() => { this.setState({ infoModal: false }) }} aria-labelledby="form-dialog-title">
@@ -350,14 +468,17 @@ class ProductPage extends React.Component {
             </IconButton>
           </DialogActions>
         </Dialog>
-      </>
+      </div>
     );
   }
 }
 const mapDispatchToProps = dispatch => {
   return {
     getProducts: payload => dispatch(getProducts(payload)),
-    setProduct: payload => dispatch(setProduct(payload))
+    setProduct: payload => dispatch(setProduct(payload)),
+    addProduct: payload => dispatch(addProduct(payload)),
+    addProductLocal: payload => dispatch(addProductLocal(payload)),
+
   }
 }
 const mapStateToProps = state => {

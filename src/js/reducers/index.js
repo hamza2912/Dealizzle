@@ -1,9 +1,13 @@
+import { object } from 'yup/lib/locale';
 import {
     GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE,
     GET_ARTIST_EVENTS_REQUEST, GET_ARTIST_EVENTS_SUCCESS,
     GET_ARTIST_EVENTS_FAILURE,
     SET_PRODUCT,
-    SET_SKIP
+    SET_SKIP,
+    ADD_PRODUCT,
+    REMOVE_PRODUCT,
+    ADD_PRODUCT_LOCAL,
 } from '../constants/action-types';
 
 // initial state of store
@@ -12,7 +16,8 @@ const initialState = {
     products: [],
     product: null,
     skip: 0,
-    artist_events: []
+    artist_events: [],
+    productList: [],
 }
 
 // main reducer function which on the basis of check update the initial state;
@@ -36,7 +41,18 @@ function rootReducer(state = initialState, action) {
         case GET_ARTIST_EVENTS_SUCCESS:
             return { ...state, artist_events: action.payload };
         case GET_ARTIST_EVENTS_FAILURE:
-            return { ...state, artist_events: [] }
+            return { ...state, artist_events: [] };
+        case ADD_PRODUCT:
+            return { ...state, productList: state.productList.concat(action.payload) }
+        case REMOVE_PRODUCT:
+            return {
+                ...state, productList: state.productList.filter((value, index) => index !== action.payload)
+
+            }
+        case ADD_PRODUCT_LOCAL:
+            return {
+                ...state, productList: action.payload
+            }
         default:
             return state;
     }
