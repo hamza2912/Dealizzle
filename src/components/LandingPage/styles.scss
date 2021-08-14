@@ -60,7 +60,7 @@
 	height: 80%;
 }
 .product_image img{
-    width: 100%;
+    width: 80%;
     height: 100%;
     transition: all 1.5s ease 0s;
 	cursor: pointer;
@@ -166,9 +166,10 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 	
   }
   .discount{
-	font-size: 1.2rem !important;
+	font-size: 1.5rem !important;
 	font-weight: 400 !important;
 	float: left;
+	padding-left: 1rem;
 	color: rgb(161, 156, 156) !important;
 	font-family: montserrat,sans-serif;
 }

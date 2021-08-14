@@ -30,7 +30,7 @@ import Details from '../Details/Details';
 let filled = false;
 let classess;
 let productLists = [];
-// localStorage.setItem("filled", false);
+// localStorage.setItem("filled", true);
 const schema = yup.object().shape({
   fullName: yup.string().required(),
   mobile: yup.string().required(),
@@ -142,9 +142,10 @@ class ProductPage extends React.Component {
       this.setState({ infoModal: true })
     }
   }
-  addToCardHandler = () => {
-
-    if (filled == false) {
+  changeProductHandler = () => {
+    filled = localStorage.getItem("filled")
+    console.log(filled)
+    if (filled == false || filled == null) {
       if (this.state.fullName.trim() === "") {
         this.setState({ v_fullName: true })
         console.log('dsfdfsg')
@@ -160,11 +161,41 @@ class ProductPage extends React.Component {
       if (this.state.deliveryAddress.trim() === "") {
         this.setState({ v_deliveryAddress: true })
       }
-      // if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.deliveryAddress.trim() === "") {
-      //   return;
-      // }
+      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.deliveryAddress.trim() === "") {
+        return;
+      }
+    }
+    localStorage.setItem("filled", true);
+    window.location.replace(window.location.origin + "/home");
+  }
+  addToCardHandler = () => {
+    filled = localStorage.getItem("filled")
+    console.log(filled)
+    if (filled == false || filled == null) {
+      if (this.state.fullName.trim() === "") {
+        this.setState({ v_fullName: true })
+        console.log('dsfdfsg')
+
+      }
+      if (this.state.mobile.trim() === "") {
+        this.setState({ v_mobile: true })
+
+      }
+      if (this.state.emirates.trim() === "") {
+        this.setState({ v_emirates: true })
+      }
+      if (this.state.deliveryAddress.trim() === "") {
+        this.setState({ v_deliveryAddress: true })
+      }
+      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.deliveryAddress.trim() === "") {
+        return;
+      }
     }
     this.props.open()
+    productLists = JSON.parse(localStorage.getItem("details"));
+    if (productLists == null) {
+      productLists = []
+    }
     localStorage.setItem("filled", true);
     filled = localStorage.getItem("filled");
     const { product } = this.props;
@@ -172,7 +203,7 @@ class ProductPage extends React.Component {
 
     if (productLists.length == 0) {
       let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
-      productLists.push([product.product_name, this.state.quantity, this.state.size, product.product_sku, this.state.color, product.retail_selling_price, image]);
+      productLists.push([product.product_name, +this.state.quantity, this.state.size, product.product_sku, this.state.color, +product.retail_selling_price, image]);
     }
     else {
       let count = false;
@@ -185,7 +216,7 @@ class ProductPage extends React.Component {
           count = true;
           console.log(count)
           console.log("asdadfsgfj")
-          productLists[i] = [product.product_name, productLists[i][1] + (+this.state.quantity), this.state.size, product.product_sku, this.state.color, product.retail_selling_price, image]
+          productLists[i] = [product.product_name, productLists[i][1] + (+this.state.quantity), this.state.size, product.product_sku, this.state.color, +product.retail_selling_price, image]
           break;
         }
 
@@ -195,7 +226,7 @@ class ProductPage extends React.Component {
       if (count === false) {
         let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
 
-        productLists.push([product.product_name, this.state.quantity, this.state.size, product.product_sku, this.state.color, product.retail_selling_price, image]);
+        productLists.push([product.product_name, +this.state.quantity, this.state.size, product.product_sku, this.state.color, +product.retail_selling_price, image]);
       }
 
 
@@ -356,7 +387,7 @@ class ProductPage extends React.Component {
                 <div className="action buttonBox">
 
                   <button className="addbutton check" type="button" onClick={this.addToCardHandler}><AddShoppingCartIcon />Add to Card</button>
-                  <button className="addbutton check" type="button" onClick={() => { window.location.replace(window.location.origin + "/home"); }}><AddShoppingCartIcon /> Add Products</button>
+                  <button className="addbutton check" type="button" onClick={this.changeProductHandler}><AddShoppingCartIcon /> Add Products</button>
                 </div>
               </div>
               <div className="details col-md-">

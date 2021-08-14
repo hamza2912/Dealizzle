@@ -96,13 +96,13 @@ class LandingPage extends React.Component {
                           <i className="fa fa-star"></i>
                           <i className="fa fa-star"></i>
                         </div> */}
-                            {/* <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}> */}
-                            <span style={{ display: 'block', width: '100%', textAlign: 'left' }} className="price">AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</span>
+
+                            <span className="price">AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</span>
 
 
 
-                            <span style={{ display: 'block', width: '100%', textAlign: 'left' }} className="discount"><del>AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</del> 70%</span>
-                            {/* </div> */}
+                            <span className="discount"><del>AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</del> 70%</span>
+
 
                           </div>
                         </div>
