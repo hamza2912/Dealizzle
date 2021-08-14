@@ -29,6 +29,7 @@ import { classes } from 'istanbul-lib-coverage';
 import Details from '../Details/Details';
 let filled = false;
 let classess;
+let productLists = [];
 // localStorage.setItem("filled", false);
 const schema = yup.object().shape({
   fullName: yup.string().required(),
@@ -91,6 +92,15 @@ class ProductPage extends React.Component {
       console.log(valueeee)
     }
 
+    let proDetail = JSON.parse(localStorage.getItem("details"));
+    if (proDetail == null) {
+      proDetail = []
+    }
+    productLists = proDetail;
+
+    console.log(proDetail)
+    console.log("Baasit")
+
   }
 
   handleSelect = (event, attr) => {
@@ -133,6 +143,7 @@ class ProductPage extends React.Component {
     }
   }
   addToCardHandler = () => {
+
     if (filled == false) {
       if (this.state.fullName.trim() === "") {
         this.setState({ v_fullName: true })
@@ -153,33 +164,51 @@ class ProductPage extends React.Component {
       //   return;
       // }
     }
-
     this.props.open()
     localStorage.setItem("filled", true);
     filled = localStorage.getItem("filled");
-    console.log(filled)
-
-
     const { product } = this.props;
     console.log(product)
-    console.log(this.state.size);
-    console.log(this.state.color);
-    console.log(this.props.addProduct({
-      p_id: product.product_sku,
-      p_name: product.product_name,
-      p_size: this.state.size,
-      p_color: this.state.color,
-      p_quantity: this.state.quantity,
-      p_price: product.retail_selling_price,
-      p_image: 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name
-    }));
-    const details = {
+
+    if (productLists.length == 0) {
+      let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
+      productLists.push([product.product_name, this.state.quantity, this.state.size, product.product_sku, this.state.color, product.retail_selling_price, image]);
+    }
+    else {
+      let count = false;
+      for (let i = 0; i < productLists.length; i++) {
+
+
+        if (productLists[i].includes(product.product_name)) {
+          let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
+
+          count = true;
+          console.log(count)
+          console.log("asdadfsgfj")
+          productLists[i] = [product.product_name, productLists[i][1] + (+this.state.quantity), this.state.size, product.product_sku, this.state.color, product.retail_selling_price, image]
+          break;
+        }
+
+
+
+      }
+      if (count === false) {
+        let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
+
+        productLists.push([product.product_name, this.state.quantity, this.state.size, product.product_sku, this.state.color, product.retail_selling_price, image]);
+      }
+
+
+    }
+    localStorage.setItem("details", JSON.stringify(productLists));
+    console.log(productLists)
+    const detail = {
       c_fullName: this.state.fullName,
       c_phone: this.state.mobile,
       c_erim: this.state.emirates,
       c_delivery: this.state.deliveryAddress,
     }
-    localStorage.setItem("details", JSON.stringify(details));
+    localStorage.setItem("name", JSON.stringify(detail));
 
 
 
@@ -248,7 +277,7 @@ class ProductPage extends React.Component {
 
 
               </div>
-              <div className="details col-md-4">
+              <div style={{ padding: '5rem 0 ' }} className="details col-md-4">
                 <h3 className="product-title">{product.product_name}</h3>
                 <h4 className="product-sku">SKU: <span className="product-sub-title">{product.product_sku}</span></h4>
                 <p className="product-description">{product.product_description !== null ? product.product_description : ""}</p>
@@ -298,19 +327,21 @@ class ProductPage extends React.Component {
                     )
                     : null
                 }
+                <div style={{ width: '70px', marginBottom: "1%", height: "5%", display: 'flex', alignItems: 'center' }}>
 
-                <Form.Label className="stock">Quantity</Form.Label>
 
-                <Form.Control
-                  className="quantity"
-                  required
-                  type="number"
-                  placeholder="Quantity"
-                  defaultValue={this.state.quantity}
-                  onChange={this.handleQuantityChange}
-                  style={{ width: '70px', marginBottom: "1%", height: "5%" }}
-                />
+                  <Form.Label className="stock">Quantity</Form.Label>
 
+                  <Form.Control
+                    className="quantity"
+                    required
+                    type="number"
+                    placeholder="Quantity"
+                    defaultValue={this.state.quantity}
+                    onChange={this.handleQuantityChange}
+                    style={{ width: '70px', marginBottom: "1%", height: "100%" }}
+                  />
+                </div>
                 {!localStorage.getItem("filled") && <div className="allInputField">
                   <h2 style={{ marginTop: '1rem' }}>Kindly fill your details below:</h2>
                   <TextField className="inputField" error={this.state.v_fullName} id="outlined-basic" label="First Name" variant="outlined" onChange={this.nameChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
@@ -324,8 +355,8 @@ class ProductPage extends React.Component {
                 </div>}
                 <div className="action buttonBox">
 
-                  <button className="add-to-cart btn btn-default btn-lg check" type="button" onClick={this.addToCardHandler}><AddShoppingCartIcon />Add to Card</button>
-                  <button className="add-to-cart btn btn-default btn-lg check" type="button" onClick={() => { window.location.replace(window.location.origin + "/home"); }}><AddShoppingCartIcon /> Add Products</button>
+                  <button className="addbutton check" type="button" onClick={this.addToCardHandler}><AddShoppingCartIcon />Add to Card</button>
+                  <button className="addbutton check" type="button" onClick={() => { window.location.replace(window.location.origin + "/home"); }}><AddShoppingCartIcon /> Add Products</button>
                 </div>
               </div>
               <div className="details col-md-">

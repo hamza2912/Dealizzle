@@ -1,71 +1,77 @@
 import classes from './Card.module.scss';
-import { useState } from 'react';
 import CloseIcon from '@material-ui/icons/Close';
-import { connect } from "react-redux";
-import { removeProduct } from '../../js/actions'
+import { useEffect, useState } from 'react';
 const Card = (props) => {
-    localStorage.setItem("name", JSON.stringify(props.productList));
-    const productRemovehandler = (value) => {
-
-        console.log(props.removeProduct(value));
+    const [prodetail, setProdetail] = useState();
+    let proDetail = JSON.parse(localStorage.getItem("details"));
+    if (proDetail == null) {
+        proDetail = []
     }
-    let valuee = 0;
-    let name = props.productList.map((value, index) => {
-        valuee += value.p_price
-        return (
-            <div className={classes.subCard}>
-                <div style={{ textAlign: 'right' }}>
-                    <CloseIcon key={index} style={{ color: 'black', }} onClick={productRemovehandler.bind(this, index)} />
-                </div>
-                <div style={{ display: 'flex' }}>
+    const removeHandler = (indexx) => {
+        console.log("chalra hon");
+        console.log(indexx)
+        let valProduct = proDetail.filter((val, index) => index !== indexx);
+        console.log(valProduct)
+        localStorage.setItem("details", JSON.stringify(valProduct));
+        proDetail = valProduct;
+        setProdetail(true)
+    }
+    let val = proDetail.map((value, index) => {
+        // return <div style={{ backgroundColor: 'white', padding: '1rem', marginBottom: '1rem', display: 'flex' }}>
+        //     <div style={{ textAlign: 'right' }}>
+        //         <CloseIcon fontSize="large" style={{ color: 'black', }} />
 
-                    <img style={{ height: '100px' }} src={value.p_image} />
-                    <div style={{ padding: '1rem' }}>
-                        <h2>{value.p_name}</h2>
-                        <h3>Price : {value.p_price}</h3>
-                        <h3>Quantity : {value.p_quantity}</h3>
-                    </div>
+        //     </div>
+        //     <div style={{ padding: '1rem 0 ' }}>
+        //         <img style={{ height: '100px', marginRight: '2rem' }} src={value[6]} />
+        //         <h2>{value[0]}</h2>
+        //         <h3>Price:{value[5]}</h3>
+        //         <h3>Quantity:{value[1]}</h3>
 
-                </div>
+        //     </div>
+        // </div>
+
+
+        return <div className={classes.subCard}>
+            <div style={{ textAlign: 'right' }}>
+                <CloseIcon style={{ color: 'black' }} onClick={removeHandler.bind(this, index)} />
             </div>
-        )
+            <div style={{ display: 'flex' }}>
+
+                <img style={{ height: '100px' }} src={value[6]} />
+                <div style={{ padding: '1rem' }}>
+                    <h2>{value[0]}</h2>
+                    <h3>Price : {value[5]}</h3>
+                    <h3>Quantity : {value[1]}</h3>
+                </div>
+
+            </div>
+        </div>
     })
 
-    console.log(valuee);
 
+    console.log(proDetail)
+    console.log("Baasit")
     return (
         <div className={`${classes.Card} ${classes.Open}`}>
             <CloseIcon fontSize="large" style={{ color: 'white' }} onClick={props.close} />
             <div className={classes.mobile}>
                 <h1 style={{ color: 'white', margin: '1rem' }}>Card</h1>
-                {props.productList.length != 0 ?
+                {proDetail.length != 0 ?
                     <div style={{ overflow: 'auto' }}>
 
-                        {name}
+                        {val}
                     </div> : <h3 style={{ textAlign: 'center', color: 'white' }}>No Product Added</h3>
                 }
-                {props.productList.length !== 0 ?
+                {proDetail.length !== 0 ?
                     <div className={classes.buttonn}>
                         <hr />
-                        <h2 style={{ color: 'white' }}>Total : {valuee}</h2>
+                        <h2 style={{ color: 'white' }}>Total :</h2>
                         <button className={classes.button}>Confirm Order</button></div> : null}
 
             </div>
         </div >
     )
 }
-const mapDispatchToProps = dispatch => {
-    return {
-
-        removeProduct: payload => dispatch(removeProduct(payload)),
-
-    }
-}
-const mapStateToProps = state => ({
-    productList: state.productList,
-
-})
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(Card);
+export default Card;
 
