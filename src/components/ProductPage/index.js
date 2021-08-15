@@ -386,7 +386,7 @@ class ProductPage extends React.Component {
                 </div>}
                 <div className="action buttonBox">
 
-                  <button className="addbutton check" type="button" onClick={this.addToCardHandler}><AddShoppingCartIcon />Add to Card</button>
+                  <button className="addbutton check" type="button" onClick={this.addToCardHandler}><AddShoppingCartIcon />Place Order</button>
                   <button className="addbutton check" type="button" onClick={this.changeProductHandler}><AddShoppingCartIcon /> Add Products</button>
                 </div>
               </div>

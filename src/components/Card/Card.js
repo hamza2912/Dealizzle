@@ -62,7 +62,7 @@ const Card = (props) => {
             <div className={`${classes.Card} ${classes.Open}`}>
                 <CloseIcon fontSize="large" style={{ color: 'white' }} onClick={props.close} />
                 <div className={classes.mobile}>
-                    <h1 style={{ color: 'white', margin: '1rem' }}>Card</h1>
+                    <h1 style={{ color: 'white', margin: '1rem' }}>Cart</h1>
                     {proDetail.length != 0 ?
                         <div style={{ overflow: 'auto' }}>
 
