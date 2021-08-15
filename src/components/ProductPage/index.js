@@ -249,8 +249,8 @@ class ProductPage extends React.Component {
     const { product } = this.props;
     // console.log(this.state);
     return (
-      <div style={{ margin: '0 10%' }}>
-        <div style={{ margin: '0 10%' }}>
+      <div >
+        <div >
 
           <h1 style={{ textAlign: 'center', fontSize: 40 }}>Women</h1>
           <hr />
