@@ -72,7 +72,7 @@ const Card = (props) => {
                     {proDetail.length !== 0 ?
                         <div className={classes.buttonn}>
                             <hr />
-                            {proDetail.length == 0 ? null : proDetail.length == 1 ? < h3 style={{ color: 'white' }} >Free Shipping</h3> : <h3 style={{ color: 'white' }}>Shipping  Cost: {s_cost = 50} AED</h3>}
+                            {proDetail.length == 0 ? null : proDetail.length == 1 ? < h3 style={{ color: 'white' }} >Shipping  Cost: {s_cost = 50} AED</h3> : <h3 style={{ color: 'white' }}>Free Shipping</h3>}
                             <h2 style={{ color: 'white' }}>Total :{sum + s_cost} AED</h2>
                             <button className={classes.button}>Confirm Order</button>
                             <button className={classes.buttonss} onClick={() => { window.location.replace(window.location.origin + "/home"); }}>Add Products</button></div> : null}
