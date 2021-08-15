@@ -101,7 +101,7 @@ class LandingPage extends React.Component {
 
 
 
-                            <span className="discount"><del>AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</del> 70%</span>
+                            <span className="discount"><del>AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</del><span style={{ color: 'red' }}> 70% OFF</span></span>
 
 
                           </div>

@@ -3,6 +3,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import { NavLink } from 'react-router-dom';
 import './styles.scss';
 import Card from '../Card/Card';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 class Header extends Component {
   state = {
     activeIndex: null,
@@ -25,13 +26,13 @@ class Header extends Component {
           </NavLink>
           <ul className="nav nav-tabs">
             <li>
-              <NavLink className="nav-link" exact={true} to="/home" activeClassName="active">new arrival</NavLink>
+              <NavLink className="nav-link navstyle" exact={true} to="/home" activeClassName="active">new arrival</NavLink>
             </li>
             <li>
-              <NavLink className="nav-link" exact={true} to="/text" activeClassName="active">TextField</NavLink>
+              <NavLink className="nav-link navstyle" exact={true} to="/text" activeClassName="active">Clearances</NavLink>
             </li>
             <li>
-              <a style={{ cursor: 'pointer' }} className="nav-link" onClick={this.props.open}>Card</a>
+              <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" /></a>
             </li>
           </ul>
 

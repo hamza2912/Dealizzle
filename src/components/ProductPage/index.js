@@ -27,6 +27,7 @@ import { ThreeSixtyOutlined } from '@material-ui/icons';
 import LandingPage from '../LandingPage/index';
 import { classes } from 'istanbul-lib-coverage';
 import Details from '../Details/Details';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 let filled = false;
 let classess;
 let productLists = [];
@@ -191,6 +192,7 @@ class ProductPage extends React.Component {
         return;
       }
     }
+
     this.props.open()
     productLists = JSON.parse(localStorage.getItem("details"));
     if (productLists == null) {
@@ -256,16 +258,16 @@ class ProductPage extends React.Component {
           <hr />
         </div>
         <div className="card2">
-          <div className="container-fliud">
-            <div className="wrapper row">
-              <div className="preview col-md-5">
-                <div id='carousel-custom' className='carousel slide' data-ride='carousel'>
-                  <div className='carousel-outer shortimagee'>
+          <div className="container-fliud" style={{ margin: '0%' }}>
+            <div className="wrapper row" >
+              <div className="preview col-md-5" style={{ width: '80%', height: '80%' }}>
+                <div id='carousel-custom' className='carousel slide' data-ride='carousel' >
+                  <div className='carousel-outer shortimagee' style={{ width: '80%', height: '80%' }}>
 
-                    <div className='carousel-inner'>
+                    <div className='carousel-inner' >
 
-                      <div className='item active'>
-                        <img src={'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name} alt='' width="100%" />
+                      <div className='item active' >
+                        <img src={'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name} alt='' style={{ width: '100%', height: '100%' }} />
                       </div>
                       {
                         product.image_name.map((pr, index) => {
@@ -386,11 +388,11 @@ class ProductPage extends React.Component {
                 </div>}
                 <div className="action buttonBox">
 
-                  <button className="addbutton check" type="button" onClick={this.addToCardHandler}><AddShoppingCartIcon />Place Order</button>
-                  <button className="addbutton check" type="button" onClick={this.changeProductHandler}><AddShoppingCartIcon /> Add Products</button>
+                  <button className="addbutton1 check" type="button" onClick={this.addToCardHandler}><ShoppingCartIcon /> Place Order</button>
+                  <button className="addbutton2 check" type="button" onClick={this.changeProductHandler}><AddShoppingCartIcon /> Add Products</button>
                 </div>
               </div>
-              <div className="details col-md-">
+              <div className="details col-md-3">
                 <ul className="desktop-services" >
                   <li>
                     <div className="service-content">
