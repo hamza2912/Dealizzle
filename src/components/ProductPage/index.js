@@ -23,11 +23,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import IconButton from '@material-ui/core/IconButton';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { counterActions } from '../../reduxToolkit/index';
-import { ThreeSixtyOutlined } from '@material-ui/icons';
+import { LiveTvRounded, ThreeSixtyOutlined } from '@material-ui/icons';
 import LandingPage from '../LandingPage/index';
 import { classes } from 'istanbul-lib-coverage';
 import Details from '../Details/Details';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import axios from 'axios';
 let filled = false;
 let classess;
 let productLists = [];
@@ -42,7 +43,7 @@ class ProductPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      size: null, color: null, design: null, quantity: 1, infoModal: false,
+      size: null, color: null, design: null, quantity: 1, infoModal: false, quantityStatus: false, invertory: 0,
       fullName: "",
       mobile: "",
       emirates: "",
@@ -79,8 +80,21 @@ class ProductPage extends React.Component {
 
   componentDidMount = () => {
     const { product } = this.props;
+    console.log("API")
+    const models = { "product_quantity.value": "5f8be51e3277577ba1b84d2c", "product_id": product.sub_sku._id };
+    axios.post('http://office21.dealizle.com/api/store/product/inventory/query/get', { "models": models })
+      .then(response => {
+        this.setState({ invertory: response.data.product_quantity })
+        console.log(response.data)
+      })
+      .catch(error => {
+        console.error('There was an error!' + error);
+      });
+
     console.log("May chalra hon");
     let valueeee = JSON.parse(localStorage.getItem('name'));
+    console.log("Valueeeeeeee")
+    console.log(valueeee)
     let check = localStorage.getItem("filled");
     if (valueeee !== null && check === true) {
 
@@ -89,6 +103,13 @@ class ProductPage extends React.Component {
       this.setState({ mobile: valueeee[0].c_phone })
       this.setState({ emirates: valueeee[0].c_erim })
       this.setState({ deliveryAddress: valueeee[0].c_delivery })
+      // const detaill = {
+      //   c_fullName: valueeee[0].c_fullName,
+      //   c_phone: valueeee[0].c_phone,
+      //   c_erim: valueeee[0].c_erim,
+      //   c_delivery: valueeee[0].c_delivery,
+      // }
+      // localStorage.setItem("name", JSON.stringify(detaill));
 
       console.log(valueeee)
     }
@@ -114,6 +135,18 @@ class ProductPage extends React.Component {
 
   handleQuantityChange = (e) => {
     this.setState({ quantity: e.target.value })
+    if (e.target.value > this.state.invertory) {
+      this.setState({ quantityStatus: true })
+      console.log("qunatity running")
+      setTimeout(() => { }, 3000)
+      console.log(this.state.quantityStatus)
+    }
+    else {
+      this.setState({ quantityStatus: false })
+      setTimeout(() => { }, 3000)
+      console.log(this.state.quantityStatus)
+
+    }
   }
   handleSubmit = (e) => {
     console.log(e)
@@ -202,47 +235,173 @@ class ProductPage extends React.Component {
     filled = localStorage.getItem("filled");
     const { product } = this.props;
     console.log(product)
+    let valuee = "";
+    let product_skuu = "";
+
+    const idd = product.sub_sku.map(value => {
+      const p_color = value.color_name ? value.color_name : null;
+
+      if (value.size_name === this.state.size && p_color == this.state.color) {
+        console.log(this.state.size)
+        valuee = value._id;
+        product_skuu = value.sku_number;
+        return value._id
+      }
+      else {
+        return
+      }
+    })
+    console.log('cgheckckck')
+    console.log(idd)
+    console.log(valuee);
+    console.log(product._id)
+    console.log(product_skuu)
+    let size_id = ""
+    const p_size = product.size.map(value => {
+
+
+      if (value.text === this.state.size) {
+        size_id = value._id;
+        return value._id
+      }
+      else {
+        return
+      }
+    })
+    console.log("Sizee")
+    console.log(size_id)
+    let color_id = ""
+    const p_color = product.color.map(value => {
+
+
+      if (value.text === this.state.color) {
+        color_id = value._id;
+        return value._id
+      }
+      else {
+        return
+      }
+    })
+    console.log("Sizee")
+    console.log(color_id)
 
     if (productLists.length == 0) {
       let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
-      productLists.push([product.product_name, +this.state.quantity, this.state.size, product.product_sku, this.state.color, +product.retail_selling_price, image]);
+      productLists.push(
+        [product.product_name,
+          valuee,
+        product._id,
+          product_skuu,
+        product.product_sku,
+          image,
+        +this.state.quantity,
+        +product.retail_selling_price,
+        +product.buying_price,
+        product.supplier_id,
+        product.supplier_name,
+          size_id,
+        this.state.size,
+          color_id,
+        this.state.color,
+        product.image_name[0].name,
+        this.state.quantityStatus
+
+
+        ]);
     }
     else {
       let count = false;
       for (let i = 0; i < productLists.length; i++) {
 
 
-        if (productLists[i].includes(product.product_name)) {
+        if (productLists[i].includes(product.product_name) && productLists[i].includes(this.state.size) && productLists[i].includes(this.state.color)) {
           let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
 
           count = true;
           console.log(count)
           console.log("asdadfsgfj")
-          productLists[i] = [product.product_name, productLists[i][1] + (+this.state.quantity), this.state.size, product.product_sku, this.state.color, +product.retail_selling_price, image]
+
+          productLists[i] = [product.product_name,
+            valuee,
+          product._id,
+            product_skuu,
+          product.product_sku,
+            image,
+          productLists[i][6] + (+this.state.quantity),
+          +product.retail_selling_price,
+          +product.buying_price,
+          product.supplier_id,
+          product.supplier_name,
+            size_id,
+          this.state.size,
+            color_id,
+          this.state.color,
+          product.image_name[0].name,
+          this.state.quantityStatus
+
+
+          ]
           break;
         }
+
 
 
 
       }
       if (count === false) {
         let image = 'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name;
+        productLists.push(
+          [product.product_name,
+            valuee,
+          product._id,
+            product_skuu,
+          product.product_sku,
+            image,
+          +this.state.quantity,
+          +product.retail_selling_price,
+          +product.buying_price,
+          product.supplier_id,
+          product.supplier_name,
+            size_id,
+          this.state.size,
+            color_id,
+          this.state.color,
+          product.image_name[0].name,
+          this.state.quantityStatus
 
-        productLists.push([product.product_name, +this.state.quantity, this.state.size, product.product_sku, this.state.color, +product.retail_selling_price, image]);
+
+          ]);
       }
 
 
     }
-    localStorage.setItem("details", JSON.stringify(productLists));
-    console.log(productLists)
-    const detail = {
-      c_fullName: this.state.fullName,
-      c_phone: this.state.mobile,
-      c_erim: this.state.emirates,
-      c_delivery: this.state.deliveryAddress,
-    }
-    localStorage.setItem("name", JSON.stringify(detail));
+    let valueeee = JSON.parse(localStorage.getItem('name'));
+    console.log("Valueeeeeeee")
+    console.log(valueeee)
 
+    let check = localStorage.getItem("filled");
+    localStorage.setItem("details", JSON.stringify(productLists));
+    console.log(valueeee != null)
+    console.log(check)
+    if (valueeee != null) {
+      console.log("asdfghjkllkjhgfsdf")
+      let detail = {
+        c_fullName: valueeee["c_fullName"],
+        c_phone: valueeee["c_phone"],
+        c_erim: valueeee["c_erim"],
+        c_delivery: valueeee["c_delivery"],
+      }
+      localStorage.setItem("name", JSON.stringify(detail));
+    }
+    else {
+      let detail = {
+        c_fullName: this.state.fullName,
+        c_phone: this.state.mobile,
+        c_erim: this.state.emirates,
+        c_delivery: this.state.deliveryAddress,
+      }
+      localStorage.setItem("name", JSON.stringify(detail));
+    }
 
 
   }
@@ -262,12 +421,12 @@ class ProductPage extends React.Component {
             <div className="wrapper row" >
               <div className="preview col-md-5" style={{ width: '80%', height: '80%' }}>
                 <div id='carousel-custom' className='carousel slide' data-ride='carousel' >
-                  <div className='carousel-outer shortimagee' style={{ width: '80%', height: '80%' }}>
+                  <div className='carousel-outer shortimagee' style={{ width: '350px', height: '350px' }}>
 
                     <div className='carousel-inner' >
 
                       <div className='item active' >
-                        <img src={'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name} alt='' style={{ width: '100%', height: '100%' }} />
+                        <img src={'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name} alt='' style={{ width: '350px', height: '350px' }} />
                       </div>
                       {
                         product.image_name.map((pr, index) => {
@@ -317,7 +476,7 @@ class ProductPage extends React.Component {
 
                 {
                   product.location_data[1].discounted_price == 0 ?
-                    <h4 className="price">As low as: <span>AED {product.location_data[1].selling_price}</span></h4> :
+                    <h4 className="price">As low as: <span>AED {product.location_data[1].selling_price}</span><del><span style={{ fontSize: 'medium' }}> AED {product.location_data[1].selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> 70% OFF</span></h4> :
                     <h4 className="price">As low as: <span className="strike">AED {product.location_data[1].selling_price}</span> <span>AED {product.location_data[1].discounted_price}</span></h4>
                 }
 
@@ -336,7 +495,7 @@ class ProductPage extends React.Component {
 
                             <FormControl variant="outlined"   >
 
-                              <InputLabel className="product-select" htmlFor="select-options">{attr}</InputLabel>
+                              <InputLabel className="product-select" htmlFor="select-options" >{attr}</InputLabel>
                               <Select className="product-select" style={{ width: '50%', height: "80%" }}
                                 labelId={attr}
                                 id="dropdown-basic-button"

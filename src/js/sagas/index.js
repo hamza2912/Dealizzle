@@ -1,5 +1,7 @@
-import { GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE,
-GET_ARTIST_EVENTS_REQUEST, GET_ARTIST_EVENTS_SUCCESS, GET_ARTIST_EVENTS_FAILURE, SET_SKIP} from '../constants/action-types';
+import {
+    GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE,
+    GET_ARTIST_EVENTS_REQUEST, GET_ARTIST_EVENTS_SUCCESS, GET_ARTIST_EVENTS_FAILURE, SET_SKIP, GET_CLEARNECE_PRODUCTS_REQUEST, GET_CLEARNECE_PRODUCTS_SUCCESS, GET_CLEARNECE_PRODUCTS_FAILURE
+} from '../constants/action-types';
 import API from '../../services/index';
 import { call, takeEvery, put } from 'redux-saga/effects';
 
@@ -9,21 +11,30 @@ import { call, takeEvery, put } from 'redux-saga/effects';
 function* getProducts(action) {
     try {
         const products = yield call(API.getProducts, action.payload);
-        yield put({type: GET_PRODUCTS_SUCCESS, payload: products})
+        yield put({ type: GET_PRODUCTS_SUCCESS, payload: products })
     }
     catch (error) {
-        yield put({type: GET_PRODUCTS_FAILURE})
+        yield put({ type: GET_PRODUCTS_FAILURE })
+    }
+}
+function* getClearneceProducts(action) {
+    try {
+        const products = yield call(API.getClearneceProducts, action.payload);
+        yield put({ type: GET_CLEARNECE_PRODUCTS_SUCCESS, payload: products })
+    }
+    catch (error) {
+        yield put({ type: GET_CLEARNECE_PRODUCTS_FAILURE })
     }
 }
 
 
 function* setSkip(action) {
     try {
-        const skip =  action.payload
-        yield put({ payload: skip})
+        const skip = action.payload
+        yield put({ payload: skip })
     }
     catch (error) {
-        yield put({type: GET_PRODUCTS_FAILURE})
+        yield put({ type: GET_PRODUCTS_FAILURE })
     }
 }
 
@@ -32,15 +43,16 @@ function* setSkip(action) {
 function* getEvents(action) {
     try {
         const events = yield call(API.getArtistEvents, action.payload);
-        yield put({type: GET_ARTIST_EVENTS_SUCCESS, payload: events})
+        yield put({ type: GET_ARTIST_EVENTS_SUCCESS, payload: events })
     }
     catch (error) {
-        yield put({type: GET_ARTIST_EVENTS_FAILURE})
+        yield put({ type: GET_ARTIST_EVENTS_FAILURE })
     }
 }
 
 function* rootSaga() {
     yield takeEvery(GET_PRODUCTS_REQUEST, getProducts);
+    yield takeEvery(GET_CLEARNECE_PRODUCTS_REQUEST, getClearneceProducts);
     yield takeEvery(GET_ARTIST_EVENTS_REQUEST, getEvents);
     yield takeEvery(SET_SKIP, setSkip);
 }

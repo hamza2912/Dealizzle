@@ -1,7 +1,10 @@
-import { GET_PRODUCTS_REQUEST, GET_ARTIST_EVENTS_REQUEST, SET_PRODUCT, SET_SKIP, ADD_PRODUCT, REMOVE_PRODUCT, ADD_PRODUCT_LOCAL } from '../constants/action-types'
+import { GET_PRODUCTS_REQUEST, GET_ARTIST_EVENTS_REQUEST, SET_PRODUCT, SET_SKIP, ADD_PRODUCT, REMOVE_PRODUCT, ADD_PRODUCT_LOCAL, GET_CLEARNECE_PRODUCTS_REQUEST } from '../constants/action-types'
 
 export function getProducts(payload) {
     return { type: GET_PRODUCTS_REQUEST, payload };
+}
+export function getClearneceProducts(payload) {
+    return { type: GET_CLEARNECE_PRODUCTS_REQUEST, payload };
 }
 
 export function setProduct(payload) {

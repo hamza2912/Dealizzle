@@ -29,7 +29,7 @@ class Header extends Component {
               <NavLink className="nav-link navstyle" exact={true} to="/home" activeClassName="active">new arrival</NavLink>
             </li>
             <li>
-              <NavLink className="nav-link navstyle" exact={true} to="/text" activeClassName="active">Clearances</NavLink>
+              <NavLink className="nav-link navstyle" exact={true} to="/clearnece" activeClassName="active">Clearances</NavLink>
             </li>
             <li>
               <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" /></a>

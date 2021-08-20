@@ -8,12 +8,16 @@ import {
     ADD_PRODUCT,
     REMOVE_PRODUCT,
     ADD_PRODUCT_LOCAL,
+    GET_CLEARNECE_PRODUCTS_REQUEST,
+    GET_CLEARNECE_PRODUCTS_SUCCESS,
+    GET_CLEARNECE_PRODUCTS_FAILURE,
 } from '../constants/action-types';
 
 // initial state of store
 
 const initialState = {
     products: [],
+    clearProducts: [],
     product: null,
     skip: 0,
     artist_events: [],
@@ -24,6 +28,12 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
+        case GET_CLEARNECE_PRODUCTS_REQUEST:
+            return { ...state };
+        case GET_CLEARNECE_PRODUCTS_SUCCESS:
+            return { ...state, clearProducts: state.clearProducts.concat(action.payload) };
+        case GET_CLEARNECE_PRODUCTS_FAILURE:
+            return { ...state, clearProducts: [] }
         case GET_PRODUCTS_REQUEST:
             return { ...state };
         case GET_PRODUCTS_SUCCESS:
