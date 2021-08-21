@@ -65,6 +65,8 @@ class ProductPage extends React.Component {
       v_mobile: false,
       v_emirates: false,
       v_deliveryAddress: false,
+      v_size: false,
+      v_color: false,
       v_city: false,
       btn1: true,
       btn2: false,
@@ -99,6 +101,7 @@ class ProductPage extends React.Component {
   }
 
   componentDidMount = () => {
+
     const { product } = this.props;
     console.log("API")
     const models = { "product_quantity.value": "5f8be51e3277577ba1b84d2c", "product_id": product.sub_sku._id };
@@ -158,7 +161,7 @@ class ProductPage extends React.Component {
   }
 
   handleSelect = (event, attr) => {
-    this.setState({ [attr]: event });
+    this.setState({ [attr]: event, ["v_" + attr]: false });
   }
 
   handleCloseModal = () => {
@@ -211,7 +214,7 @@ class ProductPage extends React.Component {
   changeProductHandler = () => {
     filled = localStorage.getItem("filled")
     console.log(filled)
-    if (filled == false || filled == null) {
+    if (filled == false || filled == null || this.state.color == null || this.state.size == null) {
       if (this.state.fullName.trim() === "") {
         this.setState({ v_fullName: true })
         console.log('dsfdfsg')
@@ -230,7 +233,13 @@ class ProductPage extends React.Component {
       if (this.state.city == null) {
         this.setState({ v_city: true })
       }
-      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "") {
+      if (this.state.size == null) {
+        this.setState({ v_size: true })
+      }
+      if (this.state.color == null) {
+        this.setState({ v_color: true })
+      }
+      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "" || this.state.color == null || this.state.size == null) {
         return;
       }
     }
@@ -240,7 +249,7 @@ class ProductPage extends React.Component {
   addToCardHandler = () => {
     filled = localStorage.getItem("filled")
     console.log(filled)
-    if (filled == false || filled == null) {
+    if (filled == false || filled == null || this.state.color == null || this.state.size == null) {
       if (this.state.fullName.trim() === "") {
         this.setState({ v_fullName: true })
         console.log('dsfdfsg')
@@ -259,7 +268,13 @@ class ProductPage extends React.Component {
       if (this.state.city == null) {
         this.setState({ v_city: true })
       }
-      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "") {
+      if (this.state.color == null) {
+        this.setState({ v_color: true })
+      }
+      if (this.state.size == null) {
+        this.setState({ v_size: true })
+      }
+      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "" || this.state.color == null || this.state.size == null) {
         return;
       }
     }
@@ -333,7 +348,7 @@ class ProductPage extends React.Component {
         product.product_sku,
           image,
         +this.state.quantity,
-        +product.retail_selling_price,
+        +product.discounted_retail_selling_price,
         +product.buying_price,
         product.supplier_id,
         product.supplier_name,
@@ -494,7 +509,7 @@ class ProductPage extends React.Component {
                     </a>
                   </div>
 
-                  <ol className='carousel-indicators'>
+                  <ol className='carousel-indicators' >
                     <li data-target='#carousel-custom' data-slide-to='0' className='active'><img src={'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name} alt='' style={{ width: "50%" }} /></li>
                     {
                       product.image_name.map((pr, index) => {
@@ -543,8 +558,11 @@ class ProductPage extends React.Component {
                                 labelId={attr}
                                 id="dropdown-basic-button"
                                 label={attr}
-                                value={this.state[attr] != null ? this.state[attr] : null}
                                 onChange={(evt) => { this.handleSelect(evt.target.value, attr) }}
+                                value={this.state[attr] != null ? this.state[attr] : null}
+                                error={this.state["v_" + attr]}
+
+
                               >
 
                                 <MenuItem value="">
@@ -651,7 +669,7 @@ class ProductPage extends React.Component {
           </div>
         </div>
         <div style={{ margin: '0 10%' }}>
-          <Details />
+          <Details fine={product.fine_print} des={product.product_description} />
         </div>
 
 

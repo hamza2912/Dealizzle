@@ -36,8 +36,7 @@ const Details = (props) => {
             If you have any questions related to this deal please contact 0566455348</h3>
     }
     else if (btn2 === true) {
-        details = <h3>Size Available: 35, 36, 37, 38, 39, 40
-            Colors Available: Pink, White, Black</h3>
+        details = <h3>{props.desc}</h3>
     }
     // else if (btn3 === true) {
     //     details = <h3>

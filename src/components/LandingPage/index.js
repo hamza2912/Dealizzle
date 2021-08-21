@@ -7,18 +7,22 @@ import Card from '../Card/Card';
 class LandingPage extends React.Component {
   constructor(props) {
     super(props);
+
     if (this.props.products.length > 1) {
-      this.state = { products: this.props.products, skip: this.props.products.length * 12, loading: false }
+      this.state = { products: this.props.products, skip: this.props.products.length * 12, loading: false, val: true }
     } else {
       this.state = { products: [], skip: 12, loading: false }
     }
   }
 
+
   componentDidUpdate = (prevProps) => {
     if (prevProps.products !== this.props.products) {
+
       this.setState({ products: this.props.products })
     }
   }
+
 
   handleNavigation = (e) => {
     const { skip } = this.state;
@@ -42,7 +46,10 @@ class LandingPage extends React.Component {
 
       this.props.addProductLocal(valueeee);
       console.log(valueeee)
+
     }
+    this.setState({ val: !this.state.val })
+
 
 
 
@@ -70,12 +77,14 @@ class LandingPage extends React.Component {
           <div className="row justify-content-md-center" style={{ marginLeft: "10px", marginRight: "10px" }}>
 
             {
+
               products.length > 0 ? (
+
                 products.map((product, index) => {
+
 
                   return product.data.map((item, index) => {
                     return (
-
                       <div className="col-lg-3 col-md-4 col-sm-6 mix sale" style={{ display: "inline-block" }} data-bound="">
 
                         <div className="single_product">

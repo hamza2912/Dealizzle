@@ -371,6 +371,21 @@ img {
   border-radius: 0.3rem;
   box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
 }
+#carousel-custom .carousel-indicators {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+#carousel-custom .carousel-indicators li {
+  height: 100px;
+  width: 100px;
+}
+
+#carousel-custom .carousel-indicators li img {
+  width: 100px !important;
+  height: 100px;
+}
 
 
 
