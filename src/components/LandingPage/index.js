@@ -97,11 +97,11 @@ class LandingPage extends React.Component {
                           <i className="fa fa-star"></i>
                         </div> */}
 
-                            <span className="price">AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</span>
+                            <span className="price">AED {item.location_data[1] != null ? item.discounted_retail_selling_price : null}</span>
 
 
 
-                            <span className="discount"><del>AED {item.location_data[1] != null ? item.location_data[1].selling_price : null}</del><span style={{ color: 'red' }}> 70% OFF</span></span>
+                            <span className="discount"><del>AED {item.location_data[1] != null ? item.retail_selling_price : null}</del><span style={{ color: 'red' }}> {((item.discounted_retail_selling_price / item.retail_selling_price) * 100).toFixed(2)}% OFF</span></span>
 
 
                           </div>

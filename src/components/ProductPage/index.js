@@ -29,21 +29,34 @@ import { classes } from 'istanbul-lib-coverage';
 import Details from '../Details/Details';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import axios from 'axios';
+
 let filled = false;
 let classess;
 let productLists = [];
+let date1 = new Date();
+let date2 = new Date();
+let date3 = new Date();
+let date4 = new Date();
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+date1.setDate(date1.getDate() + 5);
+date2.setDate(date2.getDate() + 7);
+date3.setDate(date3.getDate() + 3);
+date4.setDate(date4.getDate() + 5);
+
+
 // localStorage.setItem("filled", true);
 const schema = yup.object().shape({
   fullName: yup.string().required(),
   mobile: yup.string().required(),
   emirates: yup.string().required(),
-  deliveryAddress: yup.string().required()
+  deliveryAddress: yup.string().required(),
+  city: yup.string().required()
 });
 class ProductPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      size: null, color: null, design: null, quantity: 1, infoModal: false, quantityStatus: false, invertory: 0,
+      size: null, color: null, design: null, quantity: 1, infoModal: false, quantityStatus: false, invertory: 0, deliveryTime: "",
       fullName: "",
       mobile: "",
       emirates: "",
@@ -52,9 +65,12 @@ class ProductPage extends React.Component {
       v_mobile: false,
       v_emirates: false,
       v_deliveryAddress: false,
+      v_city: false,
       btn1: true,
       btn2: false,
       btn3: false,
+      datee1: `${date1.getDate() + " " + months[date1.getMonth()]} till ${date2.getDate() + " " + months[date2.getMonth()]}`,
+      datee2: `${date3.getDate() + " " + months[date3.getMonth()]} till ${date4.getDate() + " " + months[date4.getMonth()]}`,
 
     }
 
@@ -77,6 +93,10 @@ class ProductPage extends React.Component {
     this.setState({ deliveryAddress: event.target.value, v_deliveryAddress: false });
 
   }
+  cityChangeHandler = event => {
+    this.setState({ city: event.target.value, v_city: false });
+
+  }
 
   componentDidMount = () => {
     const { product } = this.props;
@@ -84,7 +104,7 @@ class ProductPage extends React.Component {
     const models = { "product_quantity.value": "5f8be51e3277577ba1b84d2c", "product_id": product.sub_sku._id };
     axios.post('http://office21.dealizle.com/api/store/product/inventory/query/get', { "models": models })
       .then(response => {
-        this.setState({ invertory: response.data.product_quantity })
+        this.setState({ invertory: response.data.product_quantity, deliveryTime: response.data.delivery_time })
         console.log(response.data)
       })
       .catch(error => {
@@ -96,23 +116,23 @@ class ProductPage extends React.Component {
     console.log("Valueeeeeeee")
     console.log(valueeee)
     let check = localStorage.getItem("filled");
-    if (valueeee !== null && check === true) {
+    // if (valueeee !== null && check === true) {
 
-      this.props.addProductLocal(valueeee);
-      this.setState({ fullName: valueeee[0].c_fullName })
-      this.setState({ mobile: valueeee[0].c_phone })
-      this.setState({ emirates: valueeee[0].c_erim })
-      this.setState({ deliveryAddress: valueeee[0].c_delivery })
-      // const detaill = {
-      //   c_fullName: valueeee[0].c_fullName,
-      //   c_phone: valueeee[0].c_phone,
-      //   c_erim: valueeee[0].c_erim,
-      //   c_delivery: valueeee[0].c_delivery,
-      // }
-      // localStorage.setItem("name", JSON.stringify(detaill));
+    //   this.props.addProductLocal(valueeee);
+    //   this.setState({ fullName: valueeee[0].c_fullName })
+    //   this.setState({ mobile: valueeee[0].c_phone })
+    //   this.setState({ emirates: valueeee[0].c_erim })
+    //   this.setState({ deliveryAddress: valueeee[0].c_delivery })
+    //   // const detaill = {
+    //   //   c_fullName: valueeee[0].c_fullName,
+    //   //   c_phone: valueeee[0].c_phone,
+    //   //   c_erim: valueeee[0].c_erim,
+    //   //   c_delivery: valueeee[0].c_delivery,
+    //   // }
+    //   // localStorage.setItem("name", JSON.stringify(detaill));
 
-      console.log(valueeee)
-    }
+    //   console.log(valueeee)
+    // }
 
     let proDetail = JSON.parse(localStorage.getItem("details"));
     if (proDetail == null) {
@@ -122,6 +142,18 @@ class ProductPage extends React.Component {
 
     console.log(proDetail)
     console.log("Baasit")
+    if (this.state.quantity > this.state.invertory) {
+
+      this.setState({ quantityStatus: true })
+      console.log("qunatity running")
+      console.log(this.state.quantityStatus)
+    }
+    else {
+      this.setState({ quantityStatus: false })
+
+      console.log(this.state.quantityStatus)
+
+    }
 
   }
 
@@ -136,14 +168,14 @@ class ProductPage extends React.Component {
   handleQuantityChange = (e) => {
     this.setState({ quantity: e.target.value })
     if (e.target.value > this.state.invertory) {
+
       this.setState({ quantityStatus: true })
       console.log("qunatity running")
-      setTimeout(() => { }, 3000)
       console.log(this.state.quantityStatus)
     }
     else {
       this.setState({ quantityStatus: false })
-      setTimeout(() => { }, 3000)
+
       console.log(this.state.quantityStatus)
 
     }
@@ -195,7 +227,10 @@ class ProductPage extends React.Component {
       if (this.state.deliveryAddress.trim() === "") {
         this.setState({ v_deliveryAddress: true })
       }
-      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.deliveryAddress.trim() === "") {
+      if (this.state.city == null) {
+        this.setState({ v_city: true })
+      }
+      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "") {
         return;
       }
     }
@@ -221,7 +256,10 @@ class ProductPage extends React.Component {
       if (this.state.deliveryAddress.trim() === "") {
         this.setState({ v_deliveryAddress: true })
       }
-      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.deliveryAddress.trim() === "") {
+      if (this.state.city == null) {
+        this.setState({ v_city: true })
+      }
+      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "") {
         return;
       }
     }
@@ -304,7 +342,8 @@ class ProductPage extends React.Component {
           color_id,
         this.state.color,
         product.image_name[0].name,
-        this.state.quantityStatus
+        this.state.quantityStatus,
+        (this.state.quantity > this.state.invertory) ? this.state.datee1 : this.state.datee2
 
 
         ]);
@@ -337,7 +376,8 @@ class ProductPage extends React.Component {
             color_id,
           this.state.color,
           product.image_name[0].name,
-          this.state.quantityStatus
+          this.state.quantityStatus,
+          (this.state.quantity > this.state.invertory) ? this.state.datee1 : this.state.datee2
 
 
           ]
@@ -367,7 +407,8 @@ class ProductPage extends React.Component {
             color_id,
           this.state.color,
           product.image_name[0].name,
-          this.state.quantityStatus
+          this.state.quantityStatus,
+          (this.state.quantity > this.state.invertory) ? this.state.datee1 : this.state.datee2
 
 
           ]);
@@ -390,6 +431,7 @@ class ProductPage extends React.Component {
         c_phone: valueeee["c_phone"],
         c_erim: valueeee["c_erim"],
         c_delivery: valueeee["c_delivery"],
+        c_city: valueeee["c_city"],
       }
       localStorage.setItem("name", JSON.stringify(detail));
     }
@@ -399,6 +441,7 @@ class ProductPage extends React.Component {
         c_phone: this.state.mobile,
         c_erim: this.state.emirates,
         c_delivery: this.state.deliveryAddress,
+        c_city: this.state.city,
       }
       localStorage.setItem("name", JSON.stringify(detail));
     }
@@ -476,8 +519,8 @@ class ProductPage extends React.Component {
 
                 {
                   product.location_data[1].discounted_price == 0 ?
-                    <h4 className="price">As low as: <span>AED {product.location_data[1].selling_price}</span><del><span style={{ fontSize: 'medium' }}> AED {product.location_data[1].selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> 70% OFF</span></h4> :
-                    <h4 className="price">As low as: <span className="strike">AED {product.location_data[1].selling_price}</span> <span>AED {product.location_data[1].discounted_price}</span></h4>
+                    <h4 className="price">As low as: <span>AED {product.discounted_retail_selling_price}</span><del><span style={{ fontSize: 'medium' }}> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></h4> :
+                    <h4 className="price">As low as: <span className="strike">AED {product.discounted_retail_selling_price}</span> <span>AED {product.location_data[1].discounted_price}</span></h4>
                 }
 
                 {
@@ -544,7 +587,29 @@ class ProductPage extends React.Component {
                     InputLabelProps={{ style: { fontSize: 12 } }} />
                   <TextField className="inputField" error={this.state.v_deliveryAddress} id="outlined-basic" label="Delivery Address" variant="outlined" onChange={this.deliveryChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
                     InputLabelProps={{ style: { fontSize: 12 } }} />
+                  <TextField
+
+
+                    label="City"
+                    variant="outlined"
+                    className="inputField"
+                    onChange={this.cityChangeHandler}
+                    error={this.state.v_city}
+                    inputProps={{ style: { fontSize: 12 } }}
+                    InputLabelProps={{ style: { fontSize: 12 } }}
+                    select
+                  >
+
+                    <MenuItem value="Abu Dhabi">Abu Dhabi</MenuItem>
+                    <MenuItem value="Dubai">Dubai</MenuItem>
+                    <MenuItem value="Sharjah">Sharjah</MenuItem>
+                    <MenuItem value="Ajman">Ajman</MenuItem>
+                    <MenuItem value="Umm al-Qaiwain">Umm al-Qaiwain</MenuItem>
+                    <MenuItem value="Fujairah">Fujairah</MenuItem>
+                    <MenuItem value="Ra’s al-Khaimah">Ra’s al-Khaimah</MenuItem>
+                  </TextField>
                 </div>}
+                <h4>Estimated Delivery time <span style={{ color: 'red' }}>{this.state.quantity > this.state.invertory ? this.state.datee1 : this.state.datee2}</span> between 9 am till 5 Pm </h4>
                 <div className="action buttonBox">
 
                   <button className="addbutton1 check" type="button" onClick={this.addToCardHandler}><ShoppingCartIcon /> Place Order</button>

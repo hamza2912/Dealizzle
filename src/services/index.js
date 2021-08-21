@@ -8,11 +8,12 @@ const API = {
         return axios
             .post(BASE_URL + "store/product/catalog/query/get", {
                 "models": {
-                    "location_data.value": "5f8be51e3277577ba1b84d2c",
-                    "category.value": "606b54ba0846def3c4b09a19"
+                    "location_data.website_remarks": "5f8be51e3277577ba1b84d2c_Live",
+                    "category.value": "61194a6d52ad228a0f303153"
                 },
                 "skip": skip,
                 "limit": 5,
+                "sort": { "modified_date": -1 }
 
             })
             .then(response => {
@@ -27,10 +28,10 @@ const API = {
         return axios
             .post(BASE_URL + "store/product/catalog/query/get", {
                 "models": {
-                    "location_data.website_remarkse": "5f8be51e3277577ba1b84d2c_Live",
+                    "location_data.website_remarks": "5f8be51e3277577ba1b84d2c_Live",
                     "category.value": "610173363351d210026762a9"
                 },
-                "skip": 0,
+                "skip": skip,
                 "limit": 5,
                 "sort": { "modified_date": -1 }
             })

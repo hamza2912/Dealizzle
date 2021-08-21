@@ -26,21 +26,21 @@ const Card = (props) => {
         console.log("Basit")
         console.log(order_data)
         setOtp(false);
-        model = ({
-            order_number: "",
-            order_quantity: quantity,
-            order_price: sum,
-            order_cost: sumProCost,
-            location_id: '5f8be51e3277577ba1b84d2c',
-            delivery_charge: s_cost,
-            customer_details: {
-                customer_name: c_details["c_fullName"],
-                customer_address: c_details["c_delivery"],
-                customer_city: c_details["c_erim"],
-                contact_number: c_details["c_phone"],
+        model = {
+            "order_quantity": quantity,
+            "order_price": sum,
+            "order_cost": sumProCost,
+            "location_id": '5f8be51e3277577ba1b84d2c',
+            "location_name": c_details["c_city"],
+            "delivery_charge": s_cost,
+            "customer_details": {
+                "customer_name": c_details["c_fullName"],
+                "customer_address": c_details["c_delivery"],
+                "customer_city": c_details["c_erim"],
+                "contact_number": c_details["c_phone"],
             },
-            order_data
-        })
+            "order_data": order_data
+        }
         console.log("model")
         console.log(model)
         axios.post('http://office21.dealizle.com/api/store/order/guests/create', {
@@ -49,10 +49,12 @@ const Card = (props) => {
             .then(function (response) {
                 console.log("response");
                 console.log(response);
+                alert("Thanks for Shopping. Your Order Number: " + response.data.order_number)
             })
             .catch(function (error) {
                 console.log("error");
                 console.log(error);
+                alert(error)
             });
     }
     const removeHandler = (indexx) => {
@@ -66,35 +68,39 @@ const Card = (props) => {
     }
     let order_data = []
     let delivery = false;
+    let date;
+    let date2;
     let val = proDetail.map((value, index) => {
         if (value[16] == true) {
             delivery = true;
+            date = value[17]
         }
+        date2 = value[17]
         sum += (+value[6] * +value[7])
         quantity += value[6];
         sumProCost += (+value[6] * +value[8])
         order_data.push({
-            product_name: value[0],
-            product_id: value[1],
-            parent_id: value[2],
-            product_sku: value[3],
-            parent_sku: value[4],
-            image_name: value[15],
-            order_quantity: value[6],
-            available_quantity: 0,
-            product_price: value[7],
-            product_cost: value[8],
-            supplier_id: value[9],
-            supplier_name: value[10],
-            size_id: value[11],
-            size_name: value[12],
-            color_id: value[13],
-            color_name: value[14],
-            design_id: null,
-            design_name: null,
-            location_id: "5f8be51e3277577ba1b84d2c",
-            location_name: "DUBAI",
-            entry_type: "Order"
+            "product_name": value[0],
+            "product_id": value[1],
+            "parent_id": value[2],
+            "product_sku": value[3],
+            "parent_sku": value[4],
+            "image_name": value[15],
+            "order_quantity": value[6],
+            "available_quantity": 0,
+            "product_price": value[7],
+            "product_cost": value[8],
+            "supplier_id": value[9],
+            "supplier_name": value[10],
+            "size_id": value[11],
+            "size_name": value[12],
+            "color_id": value[13],
+            "color_name": value[14],
+            "design_id": "",
+            "design_name": "",
+            "location_id": "5f8be51e3277577ba1b84d2c",
+            "location_name": "DUBAI",
+            "entry_type": "Order"
         })
 
         return <div className={classes.subCard}>
@@ -135,9 +141,9 @@ const Card = (props) => {
                     {proDetail.length !== 0 ?
                         <div className={classes.buttonn}>
                             <hr />
+                            {delivery ? <h4 style={{ color: 'white' }}>Your order will deliver between {date}</h4> : <h4 style={{ color: 'white' }}>Your order will deliver between {date2}</h4>}
                             {proDetail.length == 0 ? null : proDetail.length == 1 ? < h3 style={{ color: 'white' }} >Shipping  Cost: {s_cost = 50} AED</h3> : <h3 style={{ color: 'white' }}>Free Shipping</h3>}
                             <h2 style={{ color: 'white' }}>Total :{sum + s_cost} AED</h2>
-                            {delivery ? <h2 style={{ color: 'white' }}>Your order will deliver in 12 to 15 days.</h2> : <h2 style={{ color: 'white' }}>Your order will deliver in 5 to 7 days.</h2>}
                             {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
                             {otp && <div style={{ marginTop: '1rem' }}>
                                 <h3 style={{ color: 'white' }}>Enter OTP Code:</h3>
