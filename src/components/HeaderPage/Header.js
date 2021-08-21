@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import './styles.scss';
 import Card from '../Card/Card';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { ThreeSixtyOutlined } from '@material-ui/icons';
 class Header extends Component {
   state = {
     activeIndex: null,
@@ -26,10 +27,14 @@ class Header extends Component {
           </NavLink>
           <ul className="nav nav-tabs">
             <li>
-              <NavLink className="nav-link navstyle" exact={true} to="/home" activeClassName="active">new arrival</NavLink>
+              <NavLink className="nav-link navstyle" exact={true} to="/home" activeClassName="active" onClick={() => {
+                window.location.href = "/home";
+              }}>new arrival</NavLink>
             </li>
             <li>
-              <NavLink className="nav-link navstyle" exact={true} to="/clearnece" activeClassName="active">Clearances</NavLink>
+              <NavLink className="nav-link navstyle" exact={true} to="/clearnece" activeClassName="active" onClick={() => {
+                window.location.href = "/clearnece"
+              }}>Clearances</NavLink>
             </li>
             <li>
               <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" /></a>

@@ -18,7 +18,6 @@ class LandingPage extends React.Component {
 
   componentDidUpdate = (prevProps) => {
     if (prevProps.products !== this.props.products) {
-
       this.setState({ products: this.props.products })
     }
   }

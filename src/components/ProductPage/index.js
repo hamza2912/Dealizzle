@@ -477,7 +477,7 @@ class ProductPage extends React.Component {
         <div className="card2">
           <div className="container-fliud" style={{ margin: '0%' }}>
             <div className="wrapper row" >
-              <div className="preview col-md-5" style={{ width: '80%', height: '80%' }}>
+              <div className="preview col-sm-4" style={{ width: '80%', height: '80%' }}>
                 <div id='carousel-custom' className='carousel slide' data-ride='carousel' >
                   <div className='carousel-outer shortimagee' style={{ width: '350px', height: '350px' }}>
 
@@ -527,7 +527,7 @@ class ProductPage extends React.Component {
 
 
               </div>
-              <div style={{ padding: '5rem 0 ' }} className="details col-md-4">
+              <div style={{ padding: '2rem 0 ' }} className="details col-sm-4">
                 <h3 className="product-title">{product.product_name}</h3>
                 <h4 className="product-sku">SKU: <span className="product-sub-title">{product.product_sku}</span></h4>
                 <p className="product-description">{product.product_description !== null ? product.product_description : ""}</p>
@@ -634,7 +634,7 @@ class ProductPage extends React.Component {
                   <button className="addbutton2 check" type="button" onClick={this.changeProductHandler}><AddShoppingCartIcon /> Add Products</button>
                 </div>
               </div>
-              <div className="details col-md-3">
+              <div className="details col-sm-4">
                 <ul className="desktop-services" >
                   <li>
                     <div className="service-content">
