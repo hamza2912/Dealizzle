@@ -49,6 +49,8 @@ const Card = (props) => {
             .then(function (response) {
                 console.log("response");
                 console.log(response);
+                localStorage.removeItem("details");
+                props.close()
                 alert("Thanks for Shopping. Your Order Number: " + response.data.order_number)
             })
             .catch(function (error) {
