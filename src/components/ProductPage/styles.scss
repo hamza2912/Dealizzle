@@ -102,6 +102,11 @@ img {
   color: rgb(83, 83, 83);
   font-weight: 300;
 }
+
+.sku{
+  color: #d48424;
+}
+
 .product-order-title{
   font-size: 25px !important;
   font-weight: bold !important;
@@ -324,7 +329,14 @@ img {
   align-items:center;
   width: 80%; 
   padding: 2rem 0;
+  font-weight: 600;
 }
+
+.delievery-time{
+  margin-top: 1rem;
+  font-weight: 600;
+}
+
 .check{
   width: 45%;
 }

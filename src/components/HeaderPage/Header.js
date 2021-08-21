@@ -34,7 +34,7 @@ class Header extends Component {
             <li>
               <NavLink className="nav-link navstyle" exact={true} to="/clearnece" activeClassName="active" onClick={() => {
                 window.location.href = "/clearnece"
-              }}>Clearances</NavLink>
+              }}>Clearance Sale</NavLink>
             </li>
             <li>
               <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" /></a>

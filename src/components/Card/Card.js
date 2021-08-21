@@ -111,13 +111,13 @@ const Card = (props) => {
             </div>
             <div style={{ display: 'flex' }}>
 
-                <img style={{ height: '100px' }} src={value[5]} />
+                <img style={{ height: '100px', width: '80px' }} src={value[5]} />
                 <div style={{ padding: '0rem 1rem' }}>
                     <h2>{value[0]}</h2>
-                    <h5>Price : {value[7]} AED</h5>
-                    <h5>Quantity : {value[6]}</h5>
-                    <h5>Size : {value[12]}</h5>
-                    <h5>Color : {value[14]}</h5>
+                    <h5 className={classes.fontSemibold}>Price : {value[7]} AED</h5>
+                    <h5 className={classes.fontSemibold}>Quantity : {value[6]}</h5>
+                    <h5 className={classes.fontSemibold}>Size : {value[12]}</h5>
+                    <h5 className={classes.fontSemibold}>Color : {value[14]}</h5>
                 </div>
 
             </div>
@@ -131,24 +131,24 @@ const Card = (props) => {
         <div>
             <div style={{ width: '100%', height: '100%', position: 'fixed', backgroundColor: "rgba(0,0,0,0.5)", zIndex: '10' }}></div>
             <div className={`${classes.Card} ${classes.Open}`}>
-                <CloseIcon fontSize="large" style={{ color: 'white' }} onClick={props.close} />
+                <CloseIcon fontSize="large" style={{ color: 'black' }} onClick={props.close} />
                 <div className={classes.mobile}>
-                    <h1 style={{ color: 'white', margin: '1rem' }}>Cart</h1>
+                    <h1 style={{ color: 'black', margin: '1rem' }}>Cart</h1>
                     {proDetail.length != 0 ?
                         <div style={{ overflow: 'auto' }}>
 
                             {val}
-                        </div> : <h3 style={{ textAlign: 'center', color: 'white' }}>No Product Added</h3>
+                        </div> : <h3 style={{ textAlign: 'center', color: 'black' }}>No Product Added</h3>
                     }
                     {proDetail.length !== 0 ?
                         <div className={classes.buttonn}>
                             <hr />
-                            {delivery ? <h4 style={{ color: 'white' }}>Estimated Delivery time {date} between 9 am till 5 Pm</h4> : <h4 style={{ color: 'white' }}>Estimated Delivery time {date2} between 9 am till 5 Pm</h4>}
-                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div>< h3 style={{ color: 'white' }} >Shipping  Cost: {s_cost = 50} AED</h3><h3 style={{ backgroundColor: '#FFEC00', color: 'red' }}>Buy more save shipping cost</h3></div> : <h3 style={{ color: 'white' }}>Free Shipping</h3>}
-                            <h2 style={{ color: 'white' }}>Total :{sum + s_cost} AED</h2>
+                            {delivery ? <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date}</span> between 9 am till 5 Pm</h4> : <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date2}</span> between 9 am till 5 Pm</h4>}
+                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div>< h3 className={classes.marginTop2} style={{ color: '#929090' }} >Shipping  Cost: <span className={classes.fontSemibold} style={{ color: 'black' }}>{s_cost = 50} AED</span></h3><h3 className={classes.fontSemibold} style={{ backgroundColor: '#FFEC00', color: 'black', padding: "6px" }}> <span style={{ color: 'red' }}>Buy More</span> and Save Shipping Cost</h3></div> : <h3 className={classes.marginTop2} style={{ color: '#24b124' }}>Free Shipping</h3>}
+                            <h3 style={{ color: '#929090' }}>Total :<span className={classes.fontSemibold} style={{ color: 'black' }}>{sum + s_cost} AED</span></h3>
                             {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
                             {otp && <div style={{ marginTop: '1rem' }}>
-                                <h3 style={{ color: 'white' }}>Enter OTP Code:</h3>
+                                <h3 style={{ color: 'black' }}>Enter OTP Code:</h3>
                                 <input style={{ width: '100%', padding: '0.5rem', borderRadius: '0.5rem', fontSize: 'medium' }} type="text" placeholder="OTP" />
                                 <button className={classes.button} onClick={orderSubmitHandler}>Submit Order</button>
                             </div>}

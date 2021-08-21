@@ -65,7 +65,7 @@ class Clearance extends React.Component {
                 <div className="container-fluid">
 
                     <div>
-                        <h2 class="heading">Clearances</h2>
+                        <h2 class="heading">Clearance Sale</h2>
                     </div>
                     <div className="row justify-content-md-center" style={{ marginLeft: "10px", marginRight: "10px" }}>
 

@@ -1,7 +1,7 @@
 .Card{
     height: 100vh;
     width:400px;
-    background-color: black;
+    background-color: #ffffff;;
     top:0;
     padding: 1rem;
     z-index: 10;
@@ -14,10 +14,10 @@
 .button{
     padding: 1rem 2rem;
     width: 100%;
-    margin-top: 1rem;
+    margin-top: 3rem;
     border: none;
     border-radius: 0.5rem;
-    background-color: rgb(69, 148, 69);
+    background-color: black;
     color: white;
     font-size: large;
 }
@@ -28,6 +28,7 @@
     border: none;
     border-radius: 0.5rem;
     background-color:#FFEC00;
+    font-weight: 600;
     color: black;
     font-size: large;
 }
@@ -37,6 +38,12 @@
 .Close{
     animation: moveInLeft 0.5s ease-out;
     display: none;
+}
+.fontSemibold{
+    font-weight: 600;
+}
+.marginTop2{
+    margin-top: 2rem;
 }
 @keyframes moveInRight{
     0%{
@@ -61,7 +68,7 @@
     }
 }
 .subCard{
-    background-color: white;
+    background-color: #f2f1f1;
     width: 100%;
     padding:2rem;
     margin-top: 1rem;

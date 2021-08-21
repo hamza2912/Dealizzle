@@ -529,7 +529,7 @@ class ProductPage extends React.Component {
               </div>
               <div style={{ padding: '2rem 0 ' }} className="details col-sm-4">
                 <h3 className="product-title">{product.product_name}</h3>
-                <h4 className="product-sku">SKU: <span className="product-sub-title">{product.product_sku}</span></h4>
+                <h4 className="product-sku">SKU: <span className="product-sub-title sku">{product.product_sku}</span></h4>
                 <p className="product-description">{product.product_description !== null ? product.product_description : ""}</p>
 
                 {
@@ -627,7 +627,7 @@ class ProductPage extends React.Component {
                     <MenuItem value="Ra’s al-Khaimah">Ra’s al-Khaimah</MenuItem>
                   </TextField>
                 </div>}
-                <h4>Estimated Delivery time <span style={{ color: 'red' }}>{this.state.quantity > this.state.invertory ? this.state.datee1 : this.state.datee2}</span> between 9 am till 5 Pm </h4>
+                <h4 class='delievery-time'>Estimated Delivery time <span style={{ color: 'red' }}>{this.state.quantity > this.state.invertory ? this.state.datee1 : this.state.datee2}</span> between 9 am till 5 Pm </h4>
                 <div className="action buttonBox">
 
                   <button className="addbutton1 check" type="button" onClick={this.addToCardHandler}><ShoppingCartIcon /> Place Order</button>
@@ -668,7 +668,7 @@ class ProductPage extends React.Component {
             </div>
           </div>
         </div>
-        <div style={{ margin: '0 10%' }}>
+        <div style={{ margin: '0 4%' }}>
           <Details fine={product.fine_print} des={product.product_description} />
         </div>
 
