@@ -141,7 +141,7 @@ const Card = (props) => {
                     {proDetail.length !== 0 ?
                         <div className={classes.buttonn}>
                             <hr />
-                            {delivery ? <h4 style={{ color: 'white' }}>Your order will deliver between {date}</h4> : <h4 style={{ color: 'white' }}>Your order will deliver between {date2}</h4>}
+                            {delivery ? <h4 style={{ color: 'white' }}>Estimated Delivery time {date} between 9 am till 5 Pm</h4> : <h4 style={{ color: 'white' }}>Estimated Delivery time {date2} between 9 am till 5 Pm</h4>}
                             {proDetail.length == 0 ? null : proDetail.length == 1 ? < h3 style={{ color: 'white' }} >Shipping  Cost: {s_cost = 50} AED</h3> : <h3 style={{ color: 'white' }}>Free Shipping</h3>}
                             <h2 style={{ color: 'white' }}>Total :{sum + s_cost} AED</h2>
                             {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
