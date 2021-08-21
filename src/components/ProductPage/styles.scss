@@ -348,6 +348,8 @@ img {
   align-items: center;
   
 }
+
+
 @media (max-width:400px) {
   .buttonBox{
     flex-direction: column;
@@ -359,7 +361,7 @@ img {
     width: 100%;
   }
   .shortimagee{
-    width: 80%;
+    width: 80% !important;
   }
   
 }

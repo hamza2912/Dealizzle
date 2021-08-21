@@ -51,7 +51,7 @@ const Card = (props) => {
                 console.log(response);
                 localStorage.removeItem("details");
                 props.close()
-                alert("Thanks for Shopping. Your Order Number: " + response.data.order_number)
+                alert("Dear Customer, Thank you for your order. Your order number is " + response.data.order_number)
             })
             .catch(function (error) {
                 console.log("error");
