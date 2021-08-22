@@ -18,11 +18,12 @@
     background-color: #b9a06f;
     color: white;
   }
-  @media (max-width:400px) {
+  @media only screen and (max-width:400px) {
     .button{
       font-size: small;
+      font-weight: 600;
     }
     .allButton{
-      width: 100%;
+      width: 100% !important;
     }
   }

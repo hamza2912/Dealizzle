@@ -56,7 +56,12 @@ img {
   margin-top: 50px;
   // background: #eee;
   padding: 3em;
-  line-height: 1.5em; }
+  line-height: 1.5em; 
+  @media screen and (max-width:400px) {
+    margin-top: 0px;
+    padding: 1em 3em;
+  }
+}
 
 @media screen and (min-width: 997px) {
   .wrapper {
@@ -76,7 +81,11 @@ img {
   -webkit-box-direction: normal;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
-          flex-direction: column; }
+          flex-direction: column; 
+  @media screen and (max-width:400px) {
+    padding-top: 0rem;
+  } 
+}
 
 .colors {
   -webkit-box-flex: 1;
@@ -283,6 +292,7 @@ img {
   display: revert !important;
 }
 
+
 .desktop-services{
   padding-inline-start: 0px;
 }
@@ -297,9 +307,16 @@ img {
 
 .service-icon{
   color: #ffec00;
+  @media screen and (max-width:400px) {
+    width: 40px;
+  }
 }
 .service-content{
   padding-bottom: 3%;
+  @media screen and (max-width:400px) {
+    display: flex;
+    padding-bottom: 1%;
+  }
 }
 .service-content p{
   font-size: 15px;
@@ -308,6 +325,14 @@ img {
 .service-content h4{
   font-size: 18px;
   padding-top: 2%;
+  font-weight: 600;
+  @media screen and (max-width:400px) {
+    font-size: 15px;
+  }
+}
+
+.service-info{
+  margin-left: 10px;
 }
 
 
@@ -350,18 +375,31 @@ img {
 }
 
 
-@media (max-width:400px) {
+@media screen and (max-width:600px) {
   .buttonBox{
     flex-direction: column;
+    align-items: flex-start;
   }
   .check{
     margin-bottom: 2rem;
   }
   .check{
-    width: 100%;
+    width: 80%;
   }
   .shortimagee{
     width: 80% !important;
+  }
+
+  .mobile-hidden{
+    display: none !important;
+  }
+
+  .productDetails{
+    padding: 0rem 2rem !important;
+  }
+
+  .ml-10{
+    margin-left: 20px;
   }
   
 }
@@ -374,6 +412,10 @@ img {
   border: none;
   border-radius: 0.3rem;
   box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+
+  @media screen and (max-width:600px) {
+    padding: 2rem;
+  }
 }
 .addbutton2{
   background-color: #FFEC00;
@@ -384,6 +426,11 @@ img {
   border: none;
   border-radius: 0.3rem;
   box-shadow: 1px 2px 5px rgba(0,0,0,0.5);
+
+  @media screen and (max-width:600px) {
+    padding: 2rem;
+  }
+
 }
 #carousel-custom .carousel-indicators {
   display: flex;

@@ -18,7 +18,7 @@ function App() {
     console.log('close')
   }
   return (
-    <div >
+    <div className='overflowX'>
       <Provider store={store}>
         <BrowserRouter>
           {card ? <Card close={cardCloseHandler} toggle={card} /> : null}

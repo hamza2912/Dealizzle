@@ -471,7 +471,7 @@ class ProductPage extends React.Component {
       <div >
         <div >
 
-          <h1 style={{ textAlign: 'center', fontSize: 40 }}>Women</h1>
+          <h1 style={{ textAlign: 'center', fontSize: 40, fontFamily: "'Raleway', 'sans-serif'" }}>Women</h1>
           <hr />
         </div>
         <div className="card2">
@@ -509,7 +509,7 @@ class ProductPage extends React.Component {
                     </a>
                   </div>
 
-                  <ol className='carousel-indicators' >
+                  <ol className='carousel-indicators mobile-hidden' >
                     <li data-target='#carousel-custom' data-slide-to='0' className='active'><img src={'http://office21.dealizle.com/uploads/productImages/' + product.image_name[0].name} alt='' style={{ width: "50%" }} /></li>
                     {
                       product.image_name.map((pr, index) => {
@@ -527,7 +527,7 @@ class ProductPage extends React.Component {
 
 
               </div>
-              <div style={{ padding: '2rem 0 ' }} className="details col-sm-4">
+              <div style={{ padding: '2rem 0 ' }} className="details col-sm-4 productDetails">
                 <h3 className="product-title">{product.product_name}</h3>
                 <h4 className="product-sku">SKU: <span className="product-sub-title sku">{product.product_sku}</span></h4>
                 <p className="product-description">{product.product_description !== null ? product.product_description : ""}</p>
@@ -592,7 +592,7 @@ class ProductPage extends React.Component {
                     placeholder="Quantity"
                     defaultValue={this.state.quantity}
                     onChange={this.handleQuantityChange}
-                    style={{ width: '70px', marginBottom: "1%", height: "100%" }}
+                    style={{ width: '70px', marginBottom: "1%", height: "100%", marginLeft: "10%" }}
                   />
                 </div>
                 {!localStorage.getItem("filled") && <div className="allInputField">
@@ -657,7 +657,7 @@ class ProductPage extends React.Component {
                   <li>
                     <div className="service-content">
                       <div className="service-icon service1" ><em className="fa fa-lock"><span className="hidden">Icon</span></em></div>
-                      <div className="service-info">
+                      <div className="service-info ml-10">
                         <h4>Buy With Confidence</h4>
                         <p>A website recommended by Gulf News for shoppping</p>
                       </div>

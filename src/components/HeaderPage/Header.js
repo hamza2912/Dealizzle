@@ -40,7 +40,7 @@ class Header extends Component {
               }}>Clearance Sale</NavLink>
             </li>
             <li>
-              <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" />{c_details.length}</a>
+              <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" /><span className='cart-number'>{c_details.length}</span></a>
             </li>
           </ul>
 

@@ -135,24 +135,26 @@ const Card = (props) => {
                 <div className={classes.mobile}>
                     <h1 style={{ color: 'black', margin: '1rem' }}>Cart</h1>
                     {proDetail.length != 0 ?
-                        <div style={{ overflow: 'auto' }}>
+                        <div className='cartProducts'>
 
                             {val}
                         </div> : <h3 style={{ textAlign: 'center', color: 'black' }}>No Product Added</h3>
                     }
                     {proDetail.length !== 0 ?
-                        <div className={classes.buttonn}>
+                        <div style={{ padding: "0rem 1rem"}} className={classes.buttonn}>
                             <hr />
                             {delivery ? <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date}</span> between 9 am till 5 Pm</h4> : <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date2}</span> between 9 am till 5 Pm</h4>}
-                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div>< h3 className={classes.marginTop2} style={{ color: '#929090' }} >Shipping  Cost: <span className={classes.fontSemibold} style={{ color: 'black' }}>{s_cost = 50} AED</span></h3><h3 className={classes.fontSemibold} style={{ backgroundColor: '#FFEC00', color: 'black', padding: "6px" }}> <span style={{ color: 'red' }}>Buy More</span> and Save Shipping Cost</h3></div> : <h3 className={classes.marginTop2} style={{ color: '#24b124' }}>Free Shipping</h3>}
-                            <h3 style={{ color: '#929090' }}>Total :<span className={classes.fontSemibold} style={{ color: 'black' }}>{sum + s_cost} AED</span></h3>
+                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div style={{ display: "flex"}}>< h3 className={classes.marginTop2} style={{ color: '#545353' }} >Shipping: <span className={classes.fontSemibold} style={{ color: 'black' }}>{s_cost = 50} AED</span></h3><h3 className={classes.fontSemibold} style={{ backgroundColor: '#FFEC00', color: 'black', padding: "6px", fontSize: "8px", height: "22px", borderRadius: "5px",marginLeft: "10px", marginTop: "18px"}}> <span style={{ color: 'red' }}>Buy More</span> and Save Shipping Cost</h3></div> : <h3 className={classes.marginTop2} style={{ color: '#545353' }}>Shipping: <span className={classes.fontSemibold} style={{ color: '#24b124' }}>Free</span></h3>}
+                            <h3 style={{ color: '#545353' }}>VAT: <span className={classes.fontSemibold} style={{ color: 'black' }}>{sum + s_cost}5% AED</span></h3>
+                            <h3 style={{ color: '#545353' }}>Total: <span className={classes.fontSemibold} style={{ color: 'black' }}>{sum + s_cost} AED</span></h3>
+                            <div style={{position: "absolute", bottom: "0", left: "0", padding: "20px"}}>
                             {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
                             {otp && <div style={{ marginTop: '1rem' }}>
                                 <h3 style={{ color: 'black' }}>Enter OTP Code:</h3>
                                 <input style={{ width: '100%', padding: '0.5rem', borderRadius: '0.5rem', fontSize: 'medium' }} type="text" placeholder="OTP" />
                                 <button className={classes.button} onClick={orderSubmitHandler}>Submit Order</button>
                             </div>}
-                            {!otp && <button className={classes.buttonss} onClick={() => { window.location.replace(window.location.origin + "/home"); }}>Add Products</button>}</div> : null
+                            {!otp && <button className={classes.buttonss} onClick={() => { window.location.replace(window.location.origin + "/home"); }}>Add Products</button>}</div></div> : null
                     }
 
                 </div>
