@@ -8,15 +8,18 @@ import { ThreeSixtyOutlined } from '@material-ui/icons';
 class Header extends Component {
   state = {
     activeIndex: null,
-    card: false
+    card: false,
+
   }
   constructor(props) {
     super(props);
+
 
   }
   handleClick = (index) => this.setState({ activeIndex: index });
 
   render() {
+    let c_details = JSON.parse(localStorage.getItem("details"));
 
     return (
       <>
@@ -37,7 +40,7 @@ class Header extends Component {
               }}>Clearance Sale</NavLink>
             </li>
             <li>
-              <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" /></a>
+              <a style={{ cursor: 'pointer' }} className="nav-link navstyle" onClick={this.props.open}><ShoppingBasketIcon fontSize="large" />{c_details.length}</a>
             </li>
           </ul>
 
