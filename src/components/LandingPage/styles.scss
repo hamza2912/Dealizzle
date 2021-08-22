@@ -50,6 +50,9 @@
 	background: #fff;
 	transition: .5s;
 	height: 470px;
+	@media screen and (max-width:900px) {
+		height: 350px;
+	}
 }
 .single_product:hover{
 	box-shadow: 5px 5px 25px rgba(0,0,0,0.03);
@@ -58,6 +61,9 @@
 	overflow: hidden;
 	position: relative;
 	height: 300px;
+	@media screen and (max-width:900px) {
+		height: 150px;
+	}
 }
 .product_image img{
     width: 100%;

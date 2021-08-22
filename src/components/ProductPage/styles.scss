@@ -449,6 +449,12 @@ img {
 }
 
 
+@media screen and (max-width:900px) {
+  .col-sm-6{
+    width: 50% !important;
+  }
+}
+
 
 
 
