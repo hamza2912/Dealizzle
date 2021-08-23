@@ -51,7 +51,7 @@
 	transition: .5s;
 	height: 470px;
 	@media screen and (max-width:900px) {
-		height: 350px;
+		height: 300px;
 	}
 }
 .single_product:hover{
@@ -125,6 +125,27 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 	float: left;
 	width: 100%;
 	padding: 1rem;
+	
+	p{
+		text-align: left;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
+		text-transform: none !important;
+	}
+
+	@media screen and (max-width: 600px) {
+		display: flex !important;
+		flex-direction: column !important;
+		align-items: flex-start !important;
+		padding: 0rem !important;
+		
+		p{
+			max-width: 150px;
+			margin-bottom: 0;
+			font-size: 12px;
+		}
+	}
 }
 .product_btm_text p {
 	color: #8E8E8E;
@@ -142,7 +163,7 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 }
 .product_btm_text h4,
 .product_btm_text h4 a{
-	color: #333;
+	color: black !important;
 	cursor: pointer;
 }
 
@@ -178,6 +199,15 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 	padding-left: 1rem;
 	color: rgb(161, 156, 156) !important;
 	font-family: montserrat,sans-serif;
+	@media screen and (max-width: 600px) {
+		padding-left: 0;
+		display: flex;
+		flex-direction: row;
+		font-size: 1.2rem !important;
+		span{
+			margin-left: 3px;
+		}
+	}
 }
 .no-padding{
 	padding: 0;
@@ -192,6 +222,10 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
     padding-left: 5% !important;
     margin-right: auto;
     margin-left: auto;
+	@media screen and (max-width: 600px) {
+		padding-left: 0 !important;
+		padding-right: 0 !important;
+	}
 }
 .heading{
 	text-align: center;
@@ -208,7 +242,25 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 .cartProducts{
 	height: 320px;
 	overflow-y: auto;
-	@media screen and (max-width: 400px) {
-		height: 280px;
+	@media screen and (max-width: 600px) {
+		height: 300px;
+	}
+  }
+
+  .total-cost{
+	  padding: 2px 0px;
+	  border-bottom: 2px solid #dfdfdf;
+  }
+
+  .price{
+	@media screen and (max-width: 600px) {
+		margin-bottom: 0 !important;
+	}
+  }
+
+  .sale{
+	@media screen and (max-width: 600px) {
+		padding-left: 4px !important;
+		padding-right: 4px !important;
 	}
   }

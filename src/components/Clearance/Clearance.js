@@ -96,7 +96,7 @@ class Clearance extends React.Component {
                           <i className="fa fa-star"></i>
                           <i className="fa fa-star"></i>
                         </div> */}
-
+                                                        {item.product_description == "" ? <p>A good product available in different colors and sizes</p> : <p>{item.product_description}</p>}
                                                         <span className="price">AED {item.location_data[1] != null ? item.discounted_retail_selling_price : null}</span>
 
 
