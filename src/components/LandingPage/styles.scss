@@ -208,7 +208,7 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 .cartProducts{
 	height: 320px;
 	overflow-y: auto;
-	@media screen and (max-width: 996px) {
-		height: 400px;
+	@media screen and (max-width: 400px) {
+		height: 280px;
 	}
   }
