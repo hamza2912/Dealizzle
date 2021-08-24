@@ -96,13 +96,13 @@ class Clearance extends React.Component {
                           <i className="fa fa-star"></i>
                           <i className="fa fa-star"></i>
                         </div> */}
-                                                        {item.product_description == "" ? <p>A good product available in different colors and sizes</p> : <p>{item.product_description}</p>}
-                                                        <span className="price">AED {item.location_data[1] != null ? item.discounted_retail_selling_price : null}</span>
-
-
-
-                                                        <span className="discount"><del>AED {item.location_data[1] != null ? item.retail_selling_price : null}</del><span style={{ color: 'red' }}> {((item.discounted_retail_selling_price / item.retail_selling_price) * 100).toFixed(2)}% OFF</span></span>
-
+                                                        {/* {item.product_description == "" ? <p>A good product available in different colors and sizes</p> : <p>{item.product_description}</p>} */}
+                                                        <div className="forMobile">
+                                                            <span className="price">{item.location_data[1] != null ? <div>{"AED " + item.discounted_retail_selling_price}<del style={{ color: "rgb(161, 156, 156)", fontSize: '1.5rem', fontWeight: 400 }}>{"AED " + item.retail_selling_price}</del></div> : null}</span>
+                                                            <div>
+                                                                <span style={{ color: 'red', fontSize: '1.5rem', fontWeight: 400 }}> {((item.discounted_retail_selling_price / item.retail_selling_price) * 100).toFixed(2) + "% OFF"}</span>
+                                                            </div>
+                                                        </div>
 
                                                     </div>
                                                 </div>

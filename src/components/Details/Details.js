@@ -1,6 +1,6 @@
 import './Details.scss';
 import React from 'react'
-import { useState } from 'react';
+import { useState, } from 'react';
 import { classes } from 'istanbul-lib-coverage';
 const Details = (props) => {
     const [btn1, setBtn1] = useState(true);

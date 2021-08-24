@@ -49,7 +49,7 @@
 	padding-bottom: 20px;
 	background: #fff;
 	transition: .5s;
-	height: 470px;
+	height: 400px !important;
 	@media screen and (max-width:900px) {
 		height: 300px;
 	}
@@ -195,9 +195,9 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
   .discount{
 	font-size: 1.5rem !important;
 	font-weight: 400 !important;
-	float: left;
+	float: right;
 	padding-left: 1rem;
-	color: rgb(161, 156, 156) !important;
+	color: red !important;
 	font-family: montserrat,sans-serif;
 	@media screen and (max-width: 600px) {
 		padding-left: 0;
@@ -263,4 +263,23 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 		padding-left: 4px !important;
 		padding-right: 4px !important;
 	}
+  }
+  .forMobile{
+	display: flex !important;
+	justify-content: space-between;
+	align-items: center;
+	
+	
+}
+  @media (max-width:400px){
+	  .forMobile{
+		  display: flex !important;
+		  flex-direction: column !important;
+		  float: left;
+		  padding: 0;
+		  justify-content: flex-start;
+		  margin: 0;
+		  
+		  
+	  }
   }

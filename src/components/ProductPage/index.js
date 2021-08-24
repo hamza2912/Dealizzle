@@ -534,7 +534,7 @@ class ProductPage extends React.Component {
 
                 {
                   product.location_data[1].discounted_price == 0 ?
-                    <h4 className="price">As low as: <span>AED {product.discounted_retail_selling_price}</span><del><span style={{ fontSize: 'medium' }}> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></h4> :
+                    <h4 className="price">As low as: <span>AED {product.discounted_retail_selling_price}</span><div style={{ marginTop: '2rem' }}><del><span style={{ fontSize: 'medium' }}> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></div></h4> :
                     <h4 className="price">As low as: <span className="strike">AED {product.discounted_retail_selling_price}</span> <span>AED {product.location_data[1].discounted_price}</span></h4>
                 }
 

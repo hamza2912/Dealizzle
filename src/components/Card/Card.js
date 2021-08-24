@@ -3,7 +3,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { LocalConvenienceStoreOutlined } from '@material-ui/icons';
+import { useHistory } from "react-router-dom";
+
 const Card = (props) => {
+    let history = useHistory();
+
     const [prodetail, setProdetail] = useState(true);
     const [otp, setOtp] = useState(false);
     const [total, setTotal] = useState(0);
@@ -51,7 +55,16 @@ const Card = (props) => {
                 console.log(response);
                 localStorage.removeItem("details");
                 props.close()
-                alert("Dear Customer, Thank you for your order. Your order number is " + response.data.order_number)
+                history.push({
+                    pathname: "/confirm-order",
+                    state: {
+                        key: response.data.order_number,
+                        delivery: delivery,
+                        date: date,
+                        date2: date2
+                    }
+                });
+                // alert("Dear Customer, Thank you for your order. Your order number is " + response.data.order_number)
             })
             .catch(function (error) {
                 console.log("error");
@@ -106,22 +119,25 @@ const Card = (props) => {
         })
 
         return <div className={classes.subCard}>
-            <div style={{ textAlign: 'right' }}>
+            <div style={{ textAlign: 'right', padding: 0, margin: 0 }}>
                 <CloseIcon style={{ color: 'black' }} onClick={removeHandler.bind(this, index)} />
             </div>
             <div style={{ display: 'flex' }}>
 
                 <img style={{ height: '100px', width: '80px' }} src={value[5]} />
-                <div style={{ padding: '0rem 1rem' }}>
-                    <h2>{value[0]}</h2>
-                    <h5 className={classes.fontSemibold}>Price : {value[7]} AED</h5>
+                <div style={{ padding: '0rem 1rem', width: '100%' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                        <h4 style={{ width: '150px', paddingRight: '1rem' }}>{value[0]}</h4>
+                        <h5 style={{ float: 'right', fontWeight: 700, paddingTop: '1rem' }}>{value[7] + " AED"}</h5>
+
+                    </div>
                     <h5 className={classes.fontSemibold}>Quantity : {value[6]}</h5>
                     <h5 className={classes.fontSemibold}>Size : {value[12]}</h5>
                     <h5 className={classes.fontSemibold}>Color : {value[14]}</h5>
                 </div>
 
             </div>
-        </div>
+        </div >
     })
 
 
@@ -135,27 +151,27 @@ const Card = (props) => {
                 <div className={classes.mobile}>
                     <h1 style={{ color: 'black', margin: '1rem' }}>Cart</h1>
                     {proDetail.length != 0 ?
-                        <div className='cartProducts'>
+                        <div >
 
                             {val}
                         </div> : <h3 style={{ textAlign: 'center', color: 'black' }}>No Product Added</h3>
                     }
                     {proDetail.length !== 0 ?
-                        <div style={{ padding: "0rem 1rem"}} className={classes.buttonn}>
+                        <div style={{ padding: "0rem 1rem" }} className={classes.buttonn}>
                             <hr />
-                            {delivery ? <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date}</span> between 9 am till 5 Pm</h4> : <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date2}</span> between 9 am till 5 Pm</h4>}
-                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div style={{ display: "flex"}}>< h3 className={classes.marginTop2} style={{ color: '#545353' }} >Shipping: <span className={classes.fontSemibold} style={{ color: 'black' }}>{s_cost = 50} AED</span></h3><h3 className={classes.fontSemibold} style={{ backgroundColor: '#FFEC00', color: 'black', padding: "6px", fontSize: "8px", height: "22px", borderRadius: "5px",marginLeft: "10px", marginTop: "18px"}}> <span style={{ color: 'red' }}>Buy More</span> and Save Shipping Cost</h3></div> : <h3 className={classes.marginTop2} style={{ color: '#545353' }}>Shipping: <span className={classes.fontSemibold} style={{ color: '#24b124' }}>Free</span></h3>}
-                            <h3 style={{ color: '#545353' }}>VAT: <span className={classes.fontSemibold} style={{ color: 'black' }}>{(sum * 5)/100 } AED (5%)</span></h3>
+                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div style={{ display: "flex" }}>< h3 className={classes.marginTop2} style={{ color: '#545353' }} >Shipping: <span className={classes.fontSemibold} style={{ color: 'black' }}>{s_cost = 12} AED</span></h3><h3 className={classes.fontSemibold} style={{ backgroundColor: '#FFEC00', color: 'black', padding: "6px", fontSize: "8px", height: "22px", borderRadius: "5px", marginLeft: "10px", marginTop: "18px" }}> <span style={{ color: 'red' }}>Buy More</span> and Save Shipping Cost</h3></div> : <h3 className={classes.marginTop2} style={{ color: '#545353' }}>Shipping: <span className={classes.fontSemibold} style={{ color: '#24b124' }}>Free</span></h3>}
+                            <h3 style={{ color: '#545353' }}>VAT: <span className={classes.fontSemibold} style={{ color: 'black' }}>{((sum + s_cost) * 5) / 100} AED (5%)</span></h3>
                             <div className='total-cost'></div>
-                            <h3 style={{ color: '#545353', marginTop: "6px"}}>Total: <span className={classes.fontSemibold} style={{ color: 'black' }}>{sum + s_cost} AED</span></h3>
-                            <div style={{position: "absolute", bottom: "0", left: "0", padding: "20px"}}>
-                            {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
-                            {otp && <div style={{ marginTop: '1rem' }}>
-                                <h3 style={{ color: 'black' }}>Enter OTP Code:</h3>
-                                <input style={{ width: '100%', padding: '0.5rem', borderRadius: '0.5rem', fontSize: 'medium' }} type="text" placeholder="OTP" />
-                                <button className={classes.button} onClick={orderSubmitHandler}>Submit Order</button>
-                            </div>}
-                            {!otp && <button className={classes.buttonss} onClick={() => { window.location.replace(window.location.origin + "/home"); }}>Add Products</button>}</div></div> : null
+                            <h3 style={{ color: '#545353', marginTop: "6px" }}>Total: <span className={classes.fontSemibold} style={{ color: 'black' }}>{sum + s_cost} AED</span></h3>
+                            {delivery ? <h4 style={{ color: 'black', marginTop: '2rem' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date}</span> between 9 am till 5 Pm</h4> : <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date2}</span> between 9 am till 5 Pm</h4>}
+                            <div style={{ bottom: "0", left: "0", padding: "20px" }}>
+                                {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
+                                {otp && <div style={{ marginTop: '1rem' }}>
+                                    <h3 style={{ color: 'black' }}>Enter OTP Code:</h3>
+                                    <input style={{ width: '100%', padding: '0.5rem', borderRadius: '0.5rem', fontSize: 'medium' }} type="text" placeholder="OTP" />
+                                    <button className={classes.button} onClick={orderSubmitHandler}>Submit Order</button>
+                                </div>}
+                                {!otp && <button className={classes.buttonss} onClick={() => { window.location.replace(window.location.origin + "/home"); }}>Add Products</button>}</div></div> : null
                     }
 
                 </div>
