@@ -119,21 +119,21 @@ const Card = (props) => {
         })
 
         return <div className={classes.subCard}>
-            <div style={{ textAlign: 'right', padding: 0, margin: 0 }}>
-                <CloseIcon style={{ color: 'black' }} onClick={removeHandler.bind(this, index)} />
+            <div className={classes.marginBottom2} style={{ textAlign: 'right', padding: 0, margin: 0}}>
+                <CloseIcon style={{ color: 'black', cursor: "pointer" }} onClick={removeHandler.bind(this, index)} />
             </div>
             <div style={{ display: 'flex' }}>
 
                 <img style={{ height: '100px', width: '80px' }} src={value[5]} />
                 <div style={{ padding: '0rem 1rem', width: '100%' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
-                        <h4 style={{ width: '150px', paddingRight: '1rem' }}>{value[0]}</h4>
-                        <h5 style={{ float: 'right', fontWeight: 700, paddingTop: '1rem' }}>{value[7] + " AED"}</h5>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <h4 className={classes.fontSemibold} style={{ width: '150px', paddingRight: '1rem' }}>{value[0]}</h4>
+                        <h5 style={{ float: 'right', fontWeight: 700 }}>{value[7] + " AED"}</h5>
 
                     </div>
-                    <h5 className={classes.fontSemibold}>Quantity : {value[6]}</h5>
-                    <h5 className={classes.fontSemibold}>Size : {value[12]}</h5>
-                    <h5 className={classes.fontSemibold}>Color : {value[14]}</h5>
+                    <h5 >Quantity : {value[6]}</h5>
+                    <h5 >Size : {value[12]}</h5>
+                    <h5 >Color : {value[14]}</h5>
                 </div>
 
             </div>
@@ -142,12 +142,11 @@ const Card = (props) => {
 
 
     console.log(proDetail)
-    console.log("Baasit")
     return (
         <div>
             <div style={{ width: '100%', height: '100%', position: 'fixed', backgroundColor: "rgba(0,0,0,0.5)", zIndex: '10' }}></div>
             <div className={`${classes.Card} ${classes.Open}`}>
-                <CloseIcon fontSize="large" style={{ color: 'black' }} onClick={props.close} />
+                <CloseIcon fontSize="large" style={{ color: 'black', cursor: "pointer" }} onClick={props.close} />
                 <div className={classes.mobile}>
                     <h1 style={{ color: 'black', margin: '1rem' }}>Cart</h1>
                     {proDetail.length != 0 ?
@@ -167,7 +166,7 @@ const Card = (props) => {
                             <div style={{ bottom: "0", left: "0", padding: "20px" }}>
                                 {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
                                 {otp && <div style={{ marginTop: '1rem' }}>
-                                    <h3 style={{ color: 'black' }}>Enter OTP Code:</h3>
+                                    <h3 style={{ color: 'black' }}>We have sent an OTP code on your mobile number. Please enter that code:</h3>
                                     <input style={{ width: '100%', padding: '0.5rem', borderRadius: '0.5rem', fontSize: 'medium' }} type="text" placeholder="OTP" />
                                     <button className={classes.button} onClick={orderSubmitHandler}>Submit Order</button>
                                 </div>}

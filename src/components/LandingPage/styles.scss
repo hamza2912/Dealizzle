@@ -51,7 +51,7 @@
 	transition: .5s;
 	height: 400px !important;
 	@media screen and (max-width:900px) {
-		height: 300px;
+		height: 280px !important;
 	}
 }
 .single_product:hover{
@@ -268,17 +268,20 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 	display: flex !important;
 	justify-content: space-between;
 	align-items: center;
+	margin-top: -18px;
 	
 	
 }
-  @media (max-width:400px){
+  @media screen and (max-width:600px){
 	  .forMobile{
 		  display: flex !important;
 		  flex-direction: column !important;
-		  float: left;
+		//   float: left;
+		  align-items: flex-start;
 		  padding: 0;
 		  justify-content: flex-start;
 		  margin: 0;
+		  margin-top: -18px;
 		  
 		  
 	  }

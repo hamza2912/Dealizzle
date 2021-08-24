@@ -217,3 +217,26 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
     font-weight: normal;
     letter-spacing: -0.5px;
 }
+
+.forMobile{
+	display: flex !important;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: -18px;
+	
+	
+}
+  @media screen and (max-width:600px){
+	  .forMobile{
+		  display: flex !important;
+		  flex-direction: column !important;
+		//   float: left;
+		  align-items: flex-start;
+		  padding: 0;
+		  justify-content: flex-start;
+		  margin: 0;
+		  margin-top: -18px;
+		  
+		  
+	  }
+  }

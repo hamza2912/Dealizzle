@@ -28,12 +28,14 @@ const Details = (props) => {
     // let classes3 = btn3 ? "button aactive" : "button";
     let details;
     if (btn1 === true) {
-        details = <h3 className='details-content'>Delivery charges of AED 16 will be added to your total amount at the time of delivery
-            Enter your delivery address and your correct mobile phone number at check out
-            Delivery within 5 -7 working days from the time you place the order
-            Delivery within city limits in the UAE
-            Buy One Product Or 10, We charge AED 16 To Deliver All. We charge Per Delivery Not Per Item. Free Delivery Above AED 200
-            If you have any questions related to this deal please contact 0566455348</h3>
+        details = <ul style={{  paddingLeft: "10px"}} className='details-content'>
+            <li>Delivery charges of AED 16 will be added to your total amount at the time of delivery</li>
+            <li>Enter your delivery address and your correct mobile phone number at check out</li>
+            <li>Delivery within 5 -7 working days from the time you place the order</li>
+            <li>Delivery within city limits in the UAE</li>
+            <li>Buy One Product Or 10, We charge AED 16 To Deliver All. We charge Per Delivery Not Per Item. Free Delivery Above AED 200</li>
+            <li>If you have any questions related to this deal please contact 0566455348</li>
+            </ul> 
     }
     else if (btn2 === true) {
         details = <h3 className='details-content'>{props.desc}</h3>
