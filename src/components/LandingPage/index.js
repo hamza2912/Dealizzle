@@ -107,10 +107,10 @@ class LandingPage extends React.Component {
                         </div> */}
                             {/* {item.product_description == "" ? <p>A good product available in different colors and sizes</p> : <p>{item.product_description}</p>} */}
                             <div className="forMobile">
-                              <span className="price">{item.location_data[1] != null ? <div>{"AED " + item.discounted_retail_selling_price}<del style={{ color: "rgb(161, 156, 156)", fontSize: '1.5rem', fontWeight: 400 }}>{"AED " + item.retail_selling_price}</del></div> : null}</span>
-                              <div>
-                                <span style={{ color: 'red', fontSize: '1.5rem', fontWeight: 400 }}> {((item.discounted_retail_selling_price / item.retail_selling_price) * 100).toFixed(2) + "% OFF"}</span>
-                              </div>
+                              <span className="price" style={{ marginTop: '1.5rem' }}>{item.location_data[1] != null ? <div>{"AED " + item.discounted_retail_selling_price}<del style={{ color: "rgb(161, 156, 156)", fontSize: '1.5rem', fontWeight: 400 }}>{"AED " + item.retail_selling_price}</del></div> : null}</span>
+                              <div style={{ color: 'red', fontWeight: 300 }}>{((item.discounted_retail_selling_price / item.retail_selling_price) * 100).toFixed(2) + "% OFF"}</div>
+
+
                             </div>
                             {/* <span className="discount"><del>AED {item.location_data[1] != null ? item.retail_selling_price : null}</del></span> */}
 
