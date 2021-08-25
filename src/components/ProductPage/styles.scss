@@ -104,16 +104,23 @@ img {
 .product-select{
   font-size: 12px !important;
   width: 80% !important;
+  @media screen and (max-width:600px) {
+    width: 100% !important;
+  } 
 }
-.product-sub-title, .price, .sizes, .colors, .stock, .product-sku, .product-order, .product-button, .product-order-title  {
+.product-sub-title, .price, .sizes, .colors, .stock, .product-order, .product-button, .product-order-title  {
   font-size: 20px;
   font-family: 'Montserrat', sans-serif;
   color: rgb(83, 83, 83);
-  font-weight: 300;
+  font-weight: 300 !important;
 }
 
-.sku{
-  color: #d48424;
+// .sku{
+//   color: #d48424;
+// }
+
+.font-small{
+  font-size: 1.5rem !important;
 }
 
 .product-order-title{
@@ -141,9 +148,9 @@ img {
     left: 90%;
     position: absolute !important;
   }
-.product-sku{
-  font-weight: bold;
-}
+// .product-sku{
+//   font-weight: bold;
+// }
 .quantity {
   font-size: 15px !important;
   font-weight: bold;
@@ -156,6 +163,7 @@ img {
 .stock{
   font-size: 15px;
   margin-top: 2%;
+  margin-bottom: 4%;
 }
 
 .checked, .price span {
@@ -255,7 +263,8 @@ img {
 
 #carousel-custom {
   margin: 20px auto;
-  width: 400px;
+  width: 100%;
+  // width: 400px;
 }
 #carousel-custom .carousel-indicators {
   margin: 10px 0 0;
@@ -358,8 +367,8 @@ img {
 }
 
 .delievery-time{
-  margin-top: 1rem;
-  font-weight: 600;
+  margin-top: 2rem;
+  // font-weight: 600;
 }
 
 .check{
@@ -378,7 +387,7 @@ img {
 @media screen and (max-width:600px) {
   .buttonBox{
     flex-direction: column;
-    align-items: flex-start;
+    width: 100%;
   }
   .check{
     margin-bottom: 2rem;
@@ -387,7 +396,7 @@ img {
     width: 80%;
   }
   .shortimagee{
-    width: 80% !important;
+    width: 100% !important;
   }
 
   .mobile-hidden{
@@ -404,7 +413,7 @@ img {
   
 }
 .addbutton1{
-  background-color: black;
+  background-color:#222;
   color: white;
   font-size: medium;
   

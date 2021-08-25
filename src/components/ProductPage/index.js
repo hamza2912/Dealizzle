@@ -477,7 +477,7 @@ class ProductPage extends React.Component {
         <div className="card2">
           <div className="container-fliud" style={{ margin: '0%' }}>
             <div className="wrapper row" >
-              <div className="preview col-sm-4" style={{ width: '80%', height: '80%' }}>
+              <div className="preview col-sm-4">
                 <div id='carousel-custom' className='carousel slide' data-ride='carousel' >
                   <div className='carousel-outer shortimagee' style={{ width: '350px', height: '350px' }}>
 
@@ -529,13 +529,13 @@ class ProductPage extends React.Component {
               </div>
               <div style={{ padding: '2rem 0 ' }} className="details col-sm-4 productDetails">
                 <h3 className="product-title">{product.product_name}</h3>
-                <h4 className="product-sku">SKU: <span className="product-sub-title sku">{product.product_sku}</span></h4>
+                <h4 className="product-sku">SKU: <span className="sku">{product.product_sku}</span></h4>
                 <p className="product-description">{product.product_description !== null ? product.product_description : ""}</p>
 
                 {
                   product.location_data[1].discounted_price == 0 ?
-                    <h4 className="price">As low as: <span>AED {product.discounted_retail_selling_price}</span><div style={{ marginTop: '2rem' }}><del><span style={{ fontSize: 'medium' }}> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></div></h4> :
-                    <h4 className="price">As low as: <span className="strike">AED {product.discounted_retail_selling_price}</span> <span>AED {product.location_data[1].discounted_price}</span></h4>
+                    <h4 style={{marginTop:"-8px"}}>As low as: <span style={{fontSize: "22px", color: "black" }}>AED {product.discounted_retail_selling_price}</span><div style={{ marginTop: '2rem' }}><del><span className='font-small'> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></div></h4> :
+                    <h4 style={{marginTop:"-8px"}}>As low as: <span style={{fontSize: "22px", color: "black"}} className="strike">AED {product.discounted_retail_selling_price}</span> <span className='font-small'>AED {product.location_data[1].discounted_price}</span></h4>
                 }
 
                 {
@@ -580,10 +580,10 @@ class ProductPage extends React.Component {
                     )
                     : null
                 }
-                <div style={{ width: '70px', marginBottom: "1%", height: "5%", display: 'flex', alignItems: 'center' }}>
+                <div style={{ width: '70px', marginBottom: "1%", marginTop: "2%", height: "5%", display: 'flex', alignItems: 'center' }}>
 
 
-                  <Form.Label className="stock">Quantity</Form.Label>
+                  <Form.Label className="stock">Qty</Form.Label>
 
                   <Form.Control
                     className="quantity"
@@ -592,7 +592,7 @@ class ProductPage extends React.Component {
                     placeholder="Quantity"
                     defaultValue={this.state.quantity}
                     onChange={this.handleQuantityChange}
-                    style={{ width: '70px', marginBottom: "1%", height: "100%", marginLeft: "10%" }}
+                    style={{ width: '50px', marginBottom: "1%", marginTop: "1%", height: "40px", marginLeft: "16px", textAlign: "center" }}
                   />
                 </div>
                 {!localStorage.getItem("filled") && <div className="allInputField">

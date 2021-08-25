@@ -47,7 +47,7 @@ const Card = (props) => {
         }
         console.log("model")
         console.log(model)
-        axios.post('http://office21.dealizle.com/api/store/order/guests/create', {
+        axios.post('https://office21.dealizle.com/api/store/order/guests/create', {
             "models": model
         })
             .then(function (response) {
