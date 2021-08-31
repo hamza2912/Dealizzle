@@ -244,6 +244,7 @@ class ProductPage extends React.Component {
       }
     }
     localStorage.setItem("filled", true);
+    this.addToCardHandler();
     window.location.replace(window.location.origin + "/home");
   }
   addToCardHandler = () => {
@@ -534,7 +535,7 @@ class ProductPage extends React.Component {
 
                 {
                   product.location_data[1].discounted_price == 0 ?
-                    <h4 style={{marginTop:"-8px"}}>As low as: <span style={{fontSize: "22px", color: "black" }}>AED {product.discounted_retail_selling_price}</span><div style={{ marginTop: '1rem' }}><del><span className='font-small'> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></div></h4> :
+                    <h4 style={{marginTop:"-8px"}}>As low as: <del><span className='font-small'> AED {product.retail_selling_price}</span></del><span style={{fontSize: "22px", color: "black" }}>AED {product.discounted_retail_selling_price}</span><div style={{ marginTop: '1rem' }}><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></div></h4> :
                     <h4 style={{marginTop:"-8px"}}>As low as: <span style={{fontSize: "22px", color: "black"}} className="strike">AED {product.discounted_retail_selling_price}</span> <span className='font-small'>AED {product.location_data[1].discounted_price}</span></h4>
                 }
 

@@ -158,16 +158,17 @@ const Card = (props) => {
                     {proDetail.length !== 0 ?
                         <div style={{ padding: "0rem 1rem" }} className={classes.buttonn}>
                             <hr />
-                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div style={{ display: "flex" }}>< h3 className={classes.marginTop2} style={{ color: '#545353' }} >Shipping: <span className={classes.fontSemibold} style={{ color: 'black' }}>{s_cost = 12} AED</span></h3><h3 className={classes.fontSemibold} style={{ backgroundColor: '#FFEC00', color: 'black', padding: "6px", fontSize: "8px", height: "22px", borderRadius: "5px", marginLeft: "10px", marginTop: "18px" }}> <span style={{ color: 'red' }}>Buy More</span> and Save Shipping Cost</h3></div> : <h3 className={classes.marginTop2} style={{ color: '#545353' }}>Shipping: <span className={classes.fontSemibold} style={{ color: '#24b124' }}>Free</span></h3>}
+                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <div style={{ display: "flex" }}>< h3 className={classes.marginTop2} style={{ color: '#545353' }} >Shipping: <span className={classes.fontSemibold} style={{ color: 'black' }}>{s_cost = 12} AED</span></h3></div> : <h3 className={classes.marginTop2} style={{ color: '#545353' }}>Shipping: <span className={classes.fontSemibold} style={{ color: '#24b124' }}>Free</span></h3>}
                             <h3 style={{ color: '#545353' }}>VAT: <span className={classes.fontSemibold} style={{ color: 'black' }}>{((sum + s_cost) * 5) / 100} AED (5%)</span></h3>
                             <div className='total-cost'></div>
                             <h3 style={{ color: '#545353', marginTop: "6px" }}>Total: <span className={classes.fontSemibold} style={{ color: 'black' }}>{sum = (sum + s_cost + ((sum + s_cost) * 5) / 100)} AED</span></h3>
                             {delivery ? <h4 style={{ color: 'black', marginTop: '2rem' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date}</span> between 9 am till 5 Pm</h4> : <h4 className={classes.fontSemibold} style={{ color: 'black' }}>Estimated Delivery time <span style={{ color: 'red' }}>{date2}</span> between 9 am till 5 Pm</h4>}
+                            {proDetail.length == 0 ? null : proDetail.length == 1 ? <h3 className={classes.fontSemibold} style={{ backgroundColor: '#FFEC00', color: 'black', padding: "6px", fontSize: "10px", height: "22px", borderRadius: "5px", marginTop: "10px", width: "60%" }}> <span style={{ color: 'red' }}>Buy More</span> and Save Shipping Cost</h3> : null}
                             <div style={{ bottom: "0", left: "0", padding: "20px" }}>
                                 {!otp && <button className={classes.button} onClick={orderConfirmHandler}>Confirm Order</button>}
                                 {otp && <div style={{ marginTop: '1rem' }}>
                                     <h3 style={{ color: 'black' }}>We have sent an OTP code on your mobile number. Please enter that code:</h3>
-                                    <input style={{ width: '100%', padding: '0.5rem', borderRadius: '0.5rem', fontSize: 'medium' }} type="text" placeholder="OTP" />
+                                    <input style={{ width: '100%', padding: '0.7rem', borderRadius: '0.3rem', fontSize: 'medium', border: "0.5px solid", marginTop: "5px" }} type="text" placeholder="OTP" />
                                     <button className={classes.button} onClick={orderSubmitHandler}>Submit Order</button>
                                 </div>}
                                 {!otp && <button className={classes.buttonss} onClick={() => { window.location.replace(window.location.origin + "/home"); }}>Add Products</button>}</div></div> : null

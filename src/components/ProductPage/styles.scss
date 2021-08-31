@@ -309,6 +309,9 @@ img {
 
 .service1{
   font-size: 30px;
+  @media screen and (max-width:600px) {
+    font-size: 27px;
+  }
 }
 
 .icon{
@@ -317,7 +320,7 @@ img {
 
 .service-icon{
   color: #ffec00;
-  @media screen and (max-width:400px) {
+  @media screen and (max-width:600px) {
     width: 40px;
   }
 }
@@ -331,13 +334,16 @@ img {
 .service-content p{
   font-size: 15px;
   color: rgb(83, 83, 83);
+  @media screen and (max-width:400px) {
+    font-size: 12px;
+  }
 }
 .service-content h4{
   font-size: 18px;
   padding-top: 2%;
   font-weight: 600;
   @media screen and (max-width:400px) {
-    font-size: 15px;
+    font-size: 12px;
   }
 }
 
