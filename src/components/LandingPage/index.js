@@ -71,7 +71,35 @@ class LandingPage extends React.Component {
         {/* <Card /> */}
         <div className="container-fluid">
 
-          <div>
+          <div className='w-full h-auto px-3 lg:px-0'>
+              <img src="home-banner.jpg" alt="" />
+          </div>
+
+          <div className='w-full px-5 mt-10'>
+              <h2 className='text-center top-categories'>Top Categories</h2>
+              <div className='w-full border-b-2 mt-3 mb-5'></div>
+              <div className='w-full lg:w-1/4 mx-auto grid grid-cols-2 gap-4'>
+                <a href="/home" className='cursor-pointer'>
+                  <div className='flex flex-col items-center'>
+                    <div className='w-full h-auto p-1 border-2'>
+                      <img className='w-full h-auto' src="new-arrival.jpg" alt="" />
+                    </div>
+                    <p className='top-title'>New Arrival</p>
+                  </div>
+                </a>
+                <a href="/clearnece" className='cursor-pointer'>
+                  <div className='flex flex-col items-center'>
+                    <div className='w-full h-auto p-1 border-2'>
+                      <img className='w-full h-auto' src="clearance.jpg" alt="" />
+                    </div>
+                    <p className='top-title'>Clearance</p>
+                  </div>
+                </a>
+              </div>
+              {/* <div className='w-full border-b-2 mt-3'></div> */}
+          </div>
+
+          <div className='mt-5'>
             <h2 class="heading">New Arrival</h2>
           </div>
           <div className="row justify-content-md-center" style={{ marginLeft: "10px", marginRight: "10px" }}>
@@ -126,6 +154,20 @@ class LandingPage extends React.Component {
                 : null
             }
           </div>
+            
+          <div className='w-90 mx-auto h-auto footer mt-16'>
+            <div className='w-full footer-logo h-auto py-12 lg:py-24 px-6'>
+              <img src="New_Dealiz.png" alt="" />
+            </div>
+            <div className='flex flex-col mt-5 pl-2'>
+              <p className='text-white text-4xl'>Address</p>
+              <p>Ajman Media City Free Zone, A-63-01-01-12, Flamingo. UAE</p>
+              <p>info@dealizzle.com</p>
+              <div className='w-full border-b mb-5'></div>
+              <p className='text-center'>Copyright © 2021-Dealizle. All rights reserved. </p>
+            </div>
+          </div>
+
         </div>
       </>
     )

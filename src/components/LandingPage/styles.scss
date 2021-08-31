@@ -44,8 +44,8 @@
 .single_product{
     text-align: center;
     overflow: hidden;
-	margin-bottom: 30px;	
-	border: 1px solid rgba(0,0,0,0.02);
+	// margin-bottom: 30px;	
+	// border: 1px solid rgba(0,0,0,0.02);
 	padding-bottom: 20px;
 	background: #fff;
 	transition: .5s;
@@ -163,8 +163,10 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 }
 .product_btm_text h4,
 .product_btm_text h4 a{
-	color: black !important;
+	font-weight: 400;
+	color: #5d5d5d !important;
 	cursor: pointer;
+	font-size: 14px !important;
 }
 
 .new_badge {
@@ -229,12 +231,12 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 }
 .heading{
 	text-align: center;
-    margin-bottom: 8%;
-    font-size: 35px;
+    margin-bottom: 4%;
+    font-size: 30px;
     text-transform: capitalize !important;
 	font-family: 'Raleway', sans-serif !important;
     // font-family:  "Montserrat", sans-serif !important;
-    color: #5d5d5d;
+    color: black;
     font-weight: normal;
     letter-spacing: -0.5px;
 }
@@ -260,8 +262,8 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 
   .sale{
 	@media screen and (max-width: 600px) {
-		padding-left: 4px !important;
-		padding-right: 4px !important;
+		// padding-left: 4px !important;
+		// padding-right: 4px !important;
 	}
   }
   .forMobile{
@@ -285,4 +287,45 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 		  
 		  
 	  }
+  }
+
+  .top-categories{
+	font-family: raleway;
+	font-size: 36px;
+	color: #5d5d5d;
+  }
+
+  .top-title{
+	font-family: raleway,arial;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.42857143;
+    font-size: 1.4rem;
+	color: #222222;
+  }
+
+  .footer{
+	  background-color: #222222;
+	  color: #a4a4a4;
+	  font-family: raleway,arial;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 1.42857143;
+		font-size: 1.4rem;
+  }
+
+  .w-90{
+	  width: 100%;
+	  padding: 8rem;
+	  @media screen and (max-width: 600px) {
+		width: 92%;
+		padding: 1.5rem;
+	}
+  }
+
+  .footer-logo{
+	background-color: #333333;
+	display: flex;
+	justify-content: center;
+	align-items: center;
   }

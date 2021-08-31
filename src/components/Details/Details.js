@@ -30,11 +30,11 @@ const Details = (props) => {
     if (btn1 === true) {
         details = <ul style={{  paddingLeft: "10px"}} className='details-content'>
             <li>Delivery charges of AED 16 will be added to your total amount at the time of delivery</li>
-            <li>Enter your delivery address and your correct mobile phone number at check out</li>
-            <li>Delivery within 5 -7 working days from the time you place the order</li>
-            <li>Delivery within city limits in the UAE</li>
-            <li>Buy One Product Or 10, We charge AED 16 To Deliver All. We charge Per Delivery Not Per Item. Free Delivery Above AED 200</li>
-            <li>If you have any questions related to this deal please contact 0566455348</li>
+            <li style={{  marginTop: "10px"}}>Enter your delivery address and your correct mobile phone number at check out</li>
+            <li style={{  marginTop: "10px"}}>Delivery within 5 -7 working days from the time you place the order</li>
+            <li style={{  marginTop: "10px"}}>Delivery within city limits in the UAE</li>
+            <li style={{  marginTop: "10px"}}>Buy One Product Or 10, We charge AED 16 To Deliver All. We charge Per Delivery Not Per Item. Free Delivery Above AED 200</li>
+            <li style={{  marginTop: "10px", marginBottom: "20px"}}>If you have any questions related to this deal please contact 0566455348</li>
             </ul> 
     }
     else if (btn2 === true) {
@@ -48,7 +48,7 @@ const Details = (props) => {
     // }
 
     return (
-        <div style={{ height: '320px' }}>
+        <div style={{ height: 'auto' }}>
             <div className="allButton">
                 <button className={classes1} onClick={btn1Handler}>Fine Print</button>
                 <button className={classes2} onClick={btn2Handler}>Description</button>

@@ -44,8 +44,8 @@
 .single_product{
     text-align: center;
     overflow: hidden;
-	margin-bottom: 30px;	
-	border: 1px solid rgba(0,0,0,0.02);
+	// margin-bottom: 30px;	
+	// border: 1px solid rgba(0,0,0,0.02);
 	padding-bottom: 20px;
 	background: #fff;
 	transition: .5s;
@@ -143,8 +143,10 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 }
 .product_btm_text h4,
 .product_btm_text h4 a{
-	color: #333;
+	font-weight: 400;
+	color: #c2c2c2 !important;
 	cursor: pointer;
+	font-size: 16px !important;
 }
 
 .new_badge {
@@ -209,11 +211,11 @@ product-sub-title, .price, .sizes, .colors, .stock, .product_btm_text, .product_
 }
 .heading{
 	text-align: center;
-    margin-bottom: 8%;
-    font-size: 35px;
+    margin-bottom: 4%;
+    font-size: 30px;
     text-transform: capitalize !important;
     font-family:  sans-serif;
-    color: #5d5d5d;
+    color: black;
     font-weight: normal;
     letter-spacing: -0.5px;
 }

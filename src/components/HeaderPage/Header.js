@@ -24,17 +24,17 @@ class Header extends Component {
     return (
       <>
 
-        <nav className="  text-center title top_header_span" className="navbar navbar-dark ">
+        <nav className="text-center title top_header_span" className="navbar navbar-dark ">
           <NavLink className="nav-link" exact={true} to="/home">
             <img className=" image_settings" src={process.env.PUBLIC_URL + '/New_Dealiz.png'} />
           </NavLink>
           <ul className="nav nav-tabs">
-            <li>
+            <li className='hidden-block'>
               <NavLink className="nav-link navstyle" exact={true} to="/home" activeClassName="active" onClick={() => {
                 window.location.href = "/home";
               }}>new arrival</NavLink>
             </li>
-            <li>
+            <li className='hidden-block'>
               <NavLink className="nav-link navstyle" exact={true} to="/clearnece" activeClassName="active" onClick={() => {
                 window.location.href = "/clearnece"
               }}>Clearance Sale</NavLink>

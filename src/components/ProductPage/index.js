@@ -259,9 +259,9 @@ class ProductPage extends React.Component {
         this.setState({ v_mobile: true })
 
       }
-      if (this.state.emirates.trim() === "") {
-        this.setState({ v_emirates: true })
-      }
+      // if (this.state.emirates.trim() === "") {
+      //   this.setState({ v_emirates: true })
+      // }
       if (this.state.deliveryAddress.trim() === "") {
         this.setState({ v_deliveryAddress: true })
       }
@@ -274,7 +274,8 @@ class ProductPage extends React.Component {
       if (this.state.size == null) {
         this.setState({ v_size: true })
       }
-      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.emirates.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "" || this.state.color == null || this.state.size == null) {
+      // || this.state.emirates.trim() === "" 
+      if (this.state.fullName.trim() === "" || this.state.mobile.trim() === "" || this.state.city == null || this.state.deliveryAddress.trim() === "" || this.state.color == null || this.state.size == null) {
         return;
       }
     }
@@ -471,8 +472,8 @@ class ProductPage extends React.Component {
       <div >
         <div >
 
-          <h1 style={{ textAlign: 'center', fontSize: 40, fontFamily: "'Raleway', 'sans-serif'" }}>Women</h1>
-          <hr />
+          <h1 style={{ textAlign: 'center', fontSize: 40, color: '#5d5d5d', marginTop: "20px", fontWeight: "500", fontFamily: "'Raleway', 'sans-serif'" }}>Women</h1>
+          <div className='w-4/5 mx-auto border-b-2 mt-3'></div>
         </div>
         <div className="card2">
           <div className="container-fliud" style={{ margin: '0%' }}>
@@ -528,13 +529,12 @@ class ProductPage extends React.Component {
 
               </div>
               <div style={{ padding: '2rem 0 ' }} className="details col-sm-4 productDetails">
-                <h3 className="product-title">{product.product_name}</h3>
-                <h4 className="product-sku">SKU: <span className="sku">{product.product_sku}</span></h4>
+                <h3 style={{marginBottom: "0px"}} className="product-title">{product.product_name}</h3>
                 <p className="product-description">{product.product_description !== null ? product.product_description : ""}</p>
 
                 {
                   product.location_data[1].discounted_price == 0 ?
-                    <h4 style={{marginTop:"-8px"}}>As low as: <span style={{fontSize: "22px", color: "black" }}>AED {product.discounted_retail_selling_price}</span><div style={{ marginTop: '2rem' }}><del><span className='font-small'> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></div></h4> :
+                    <h4 style={{marginTop:"-8px"}}>As low as: <span style={{fontSize: "22px", color: "black" }}>AED {product.discounted_retail_selling_price}</span><div style={{ marginTop: '1rem' }}><del><span className='font-small'> AED {product.retail_selling_price}</span></del><span style={{ fontSize: 'medium', color: 'red' }}> {((product.discounted_retail_selling_price / product.retail_selling_price) * 100).toFixed(2)}% OFF</span></div></h4> :
                     <h4 style={{marginTop:"-8px"}}>As low as: <span style={{fontSize: "22px", color: "black"}} className="strike">AED {product.discounted_retail_selling_price}</span> <span className='font-small'>AED {product.location_data[1].discounted_price}</span></h4>
                 }
 
@@ -543,6 +543,7 @@ class ProductPage extends React.Component {
                     <h4 className="stock">In Stock</h4> :
                     <h4 className="stock">Out of Stock</h4>
                 }
+                <h4 style={{marginBottom: "20px"}} className="product-sku">SKU: <span className="sku">{product.product_sku}</span></h4>
 
                 {
                   product.product_configuration === "configurable" ?
@@ -596,13 +597,13 @@ class ProductPage extends React.Component {
                   />
                 </div>
                 {!localStorage.getItem("filled") && <div className="allInputField">
-                  <h2 style={{ marginTop: '1rem' }}>Kindly fill your details below:</h2>
+                  <h2 style={{ marginTop: '1rem', marginBottom: '1rem' }}>Kindly fill your details below:</h2>
                   <TextField className="inputField" error={this.state.v_fullName} id="outlined-basic" label="First Name" variant="outlined" onChange={this.nameChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
                     InputLabelProps={{ style: { fontSize: 12 } }} />
                   <TextField className="inputField" error={this.state.v_mobile} id="outlined-basic" label="Mobile" variant="outlined" onChange={this.mobileChangeHandler} type="phone" inputProps={{ style: { fontSize: 12 } }} // font size of input text
                     InputLabelProps={{ style: { fontSize: 12 } }} />
-                  <TextField className="inputField" error={this.state.v_emirates} id="outlined-basic" label="Emirates" variant="outlined" onChange={this.emiratesChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
-                    InputLabelProps={{ style: { fontSize: 12 } }} />
+                  {/* <TextField className="inputField" error={this.state.v_emirates} id="outlined-basic" label="Emirates" variant="outlined" onChange={this.emiratesChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
+                    InputLabelProps={{ style: { fontSize: 12 } }} /> */}
                   <TextField className="inputField" error={this.state.v_deliveryAddress} id="outlined-basic" label="Delivery Address" variant="outlined" onChange={this.deliveryChangeHandler} inputProps={{ style: { fontSize: 12 } }} // font size of input text
                     InputLabelProps={{ style: { fontSize: 12 } }} />
                   <TextField
@@ -774,6 +775,23 @@ class ProductPage extends React.Component {
             </IconButton>
           </DialogActions>
         </Dialog>
+        <div className='lg:px-12'>
+          <div className='w-90 mx-auto h-auto footer mt-16'>
+            <div className='w-full footer-logo h-auto py-12 lg:py-24 px-6'>
+            <img src="/New_Dealiz.png" alt="" />
+            </div>
+            <div className='flex flex-col mt-5 pl-2'>
+            <p className='text-white text-4xl'>Address</p>
+            <p>Ajman Media City Free Zone, A-63-01-01-12, Flamingo. UAE</p>
+            <p>info@dealizzle.com</p>
+            <div className='w-full border-b mb-5'></div>
+            <p className='text-center'>Copyright © 2021-Dealizle. All rights reserved. </p>
+            </div>
+        </div>
+
+        </div>
+        
+
       </div>
     );
   }
